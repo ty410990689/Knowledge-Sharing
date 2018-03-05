@@ -10,7 +10,9 @@ import android.widget.ImageView;
 
 import com.sicnu.personal.knowledgesharingapp.MainActivity;
 import com.sicnu.personal.knowledgesharingapp.R;
+import com.sicnu.personal.knowledgesharingapp.utils.NetConnectUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;
+import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,7 +54,16 @@ public class FlashActivity extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                startActivity(new Intent(FlashActivity.this, MainActivity.class));
+                if( NetConnectUtils.getInstance(FlashActivity.this).isWifiConnected()) {
+                    YLog.d("Can Use");
+                    startActivity(new Intent(FlashActivity.this, MainActivity.class));
+                }else if(!NetConnectUtils.getInstance(FlashActivity.this).isNetWorkConnected()){
+                    //无网络连接
+                    YLog.d("NO NET");
+                }else{
+                    //有网切不是WIFI
+                    YLog.d("HAVE NET isnot WIFI");
+                }
             }
 
             @Override
