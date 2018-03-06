@@ -8,10 +8,11 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
-import com.sicnu.personal.knowledgesharingapp.Home.activity.HomeActivity;
+
 import com.sicnu.personal.knowledgesharingapp.MainActivity;
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
+import com.sicnu.personal.knowledgesharingapp.home.activity.HomeActivity;
 import com.sicnu.personal.knowledgesharingapp.utils.NetConnectUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
