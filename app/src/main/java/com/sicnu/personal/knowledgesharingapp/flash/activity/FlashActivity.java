@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.sicnu.personal.knowledgesharingapp.MainActivity;
 import com.sicnu.personal.knowledgesharingapp.R;
+import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 import com.sicnu.personal.knowledgesharingapp.utils.NetConnectUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
@@ -56,13 +57,15 @@ public class FlashActivity extends Activity {
             public void onAnimationEnd(Animation animation) {
                 if( NetConnectUtils.getInstance(FlashActivity.this).isWifiConnected()) {
                     YLog.d("Can Use");
-                    startActivity(new Intent(FlashActivity.this, MainActivity.class));
+                    startHomeActivity(Constant.WIFI_IS_CONNECT);
                 }else if(!NetConnectUtils.getInstance(FlashActivity.this).isNetWorkConnected()){
                     //无网络连接
                     YLog.d("NO NET");
+                    startHomeActivity(Constant.NET_IS_DISCONNECT);
                 }else{
                     //有网切不是WIFI
                     YLog.d("HAVE NET isnot WIFI");
+                    startHomeActivity(Constant.NET_IS_CONNECT);
                 }
             }
 
@@ -72,5 +75,11 @@ public class FlashActivity extends Activity {
             }
         });
         ivFlashMain.startAnimation(scaleAnimation);
+    }
+
+    private void startHomeActivity(String action){
+        Intent startHomeIntent = new Intent();
+        startHomeIntent.putExtra("netState",action);
+        startActivity(startHomeIntent);
     }
 }
