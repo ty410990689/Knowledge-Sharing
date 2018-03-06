@@ -19,7 +19,7 @@ import com.sicnu.personal.knowledgesharingapp.utils.YLog;
  */
 
 public class AndroidFragment extends Fragment {
-
+    GankResponse response;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +29,18 @@ public class AndroidFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_main,container,false);
+        response = new GankResponse();
+        response.getRemoteGankData("Android", 10, 1, new GankDataSource.GankDataCallBack() {
+            @Override
+            public void onLoadedSuccessful(GankKnowledgeDataBean gankKnowledgeDataBean) {
+                YLog.d("data is success : "+gankKnowledgeDataBean.isError());
+            }
+
+            @Override
+            public void onLoadedfailed() {
+                YLog.d("data is failed");
+            }
+        });
         return view;
     }
 }
