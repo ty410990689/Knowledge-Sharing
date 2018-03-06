@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
+import com.sicnu.personal.knowledgesharingapp.Home.activity.HomeActivity;
 import com.sicnu.personal.knowledgesharingapp.MainActivity;
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
@@ -78,7 +79,7 @@ public class FlashActivity extends Activity {
     }
 
     private void startHomeActivity(String action){
-        Intent startHomeIntent = new Intent();
+        Intent startHomeIntent = new Intent(FlashActivity.this, HomeActivity.class);
         startHomeIntent.putExtra("netState",action);
         startActivity(startHomeIntent);
     }
