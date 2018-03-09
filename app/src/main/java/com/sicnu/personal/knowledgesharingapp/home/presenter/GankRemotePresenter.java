@@ -4,6 +4,7 @@ import com.sicnu.personal.knowledgesharingapp.home.contact.GankContact;
 import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
 import com.sicnu.personal.knowledgesharingapp.home.model.datasource.GankDataSource;
 import com.sicnu.personal.knowledgesharingapp.home.model.datasource.GankResponse;
+import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 /**
  * Created by Administrator on 2018/3/6 0006.
@@ -21,28 +22,27 @@ public class GankRemotePresenter implements GankContact.GankPresenter {
        gankResponse.getRemoteGankData(type,count, page, new GankDataSource.GankDataCallBack() {
            @Override
            public void onLoadedSuccessful(GankKnowledgeDataBean gankKnowledgeDataBean) {
+               YLog.d("Here showLoadMorePage");
                if (isRefresh){
                    gankView.showRefreshPage(gankKnowledgeDataBean);
                }else{
+                   YLog.d("Here showLoadMorePage");
                    gankView.showLoadMorePage(gankKnowledgeDataBean);
                }
                gankView.showDataPage();
            }
 
            @Override
-           public void onLoadedfailed() {
+           public void onLoadedfailed(Throwable errorMessage) {
                 gankView.showErrorPage();
            }
        });
     }
 
     @Override
-    public void firstRequstData() {
-
+    public void firstRequstData(String type) {
+        YLog.d("firstRequstData");
+        getGankRemoteData(type,20,1,false);
     }
 
-    @Override
-    public void getMessageData() {
-
-    }
 }

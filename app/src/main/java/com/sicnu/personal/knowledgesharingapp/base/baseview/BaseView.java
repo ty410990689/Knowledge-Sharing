@@ -5,7 +5,5 @@ package com.sicnu.personal.knowledgesharingapp.base.baseview;
  */
 
 public interface BaseView  {
-    void showErrorPage(String errorMessage);
-    void showLoadingPage();
-    void showSuccessfulPage();
+
 }

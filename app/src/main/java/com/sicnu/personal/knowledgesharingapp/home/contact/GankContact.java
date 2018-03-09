@@ -17,6 +17,6 @@ public interface GankContact {
     }
     interface GankPresenter extends BasePresenter{
         void getGankRemoteData(String type,int count,int page,boolean isRefresh);
-        void firstRequstData();
+        void firstRequstData(String type);
     }
 }

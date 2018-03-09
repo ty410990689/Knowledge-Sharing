@@ -18,7 +18,7 @@ import rx.schedulers.Schedulers;
 
 public class GankRemoteDataSource implements GankDataSource {
     @Override
-    public void getRemoteGankData(String type,int count,int page, GankDataCallBack dataCallBack) {
+    public void getRemoteGankData(String type, int count, int page, final GankDataCallBack dataCallBack) {
 
         String url = count+"/"+page;
         YLog.d("HttpLogInfo : count is : "+url);
@@ -35,10 +35,12 @@ public class GankRemoteDataSource implements GankDataSource {
                     @Override
                     public void onError(Throwable e) {
                         YLog.d("Gank Datas is error : "+e.getMessage());
+                        dataCallBack.onLoadedfailed(e);
                     }
 
                     @Override
                     public void onNext(GankKnowledgeDataBean gankKnowledgeDataBean) {
+                        dataCallBack.onLoadedSuccessful(gankKnowledgeDataBean);
                         YLog.d("Gank Datas is OK : "+gankKnowledgeDataBean.getResults().size());
                     }
                 });

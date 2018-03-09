@@ -5,5 +5,5 @@ package com.sicnu.personal.knowledgesharingapp.base.basepresenter;
  */
 
 public interface BasePresenter<T> {
-    void getMessageData();
+
 }
