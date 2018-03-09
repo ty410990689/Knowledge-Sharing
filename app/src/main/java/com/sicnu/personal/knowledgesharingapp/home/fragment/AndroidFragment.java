@@ -37,7 +37,7 @@ public class AndroidFragment extends Fragment {
             }
 
             @Override
-            public void onLoadedfailed() {
+            public void onLoadedfailed(Throwable errorMessage) {
                 YLog.d("data is failed");
             }
         });

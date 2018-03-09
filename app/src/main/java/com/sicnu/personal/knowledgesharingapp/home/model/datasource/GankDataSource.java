@@ -9,7 +9,7 @@ import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeD
 public interface GankDataSource {
     interface GankDataCallBack{
         void onLoadedSuccessful(GankKnowledgeDataBean gankKnowledgeDataBean);
-        void onLoadedfailed();
+        void onLoadedfailed(Throwable error);
     }
     void getRemoteGankData(String type,int count,int page, GankDataCallBack dataCallBack);
 }
