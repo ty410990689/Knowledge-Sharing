@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/rl_item_home_bg"
+        android:layout_width="match_parent"
+        app:layout_heightPercent="20%">
+
+        <ImageView
+            android:id="@+id/iv_home_rc_item_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBlack" />
+
+        <View
+            android:id="@+id/view_home_rc_item_cover"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/knowledge_recycler_bg_night_theme"
+            app:layout_heightPercent="50%"></View>
+        <TextView
+            android:id="@+id/tv_knowledge_desc"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:gravity="left"
+            app:layout_marginBottomPercent="25%"
+            app:layout_heightPercent="25%"
+            />
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:id="@+id/tv_knowledge_who"
+            app:layout_widthPercent="40%"
+            app:layout_heightPercent="23%"
+            android:gravity="left"
+            />
+        <TextView
+            android:id="@+id/tv_knowledge_time"
+            app:layout_widthPercent="60%"
+            app:layout_heightPercent="23%"
+            android:gravity="right"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            />
+    </android.support.percent.PercentRelativeLayout>
+
+</android.support.percent.PercentFrameLayout>
