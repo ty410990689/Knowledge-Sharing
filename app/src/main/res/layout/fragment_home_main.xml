@@ -2,25 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_height="wrap_content"
+        android:id="@+id/swl_knowledge_home"
+        android:layout_width="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rc_home_main_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
-    <android.support.percent.PercentRelativeLayout
-        android:visibility="gone"
-        android:id="@+id/rl_home_error_page"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBlack">
-        <TextView
-            android:id="@+id/tv_error_page"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="出现错误，请联系客服"
-            />
-    </android.support.percent.PercentRelativeLayout>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </FrameLayout>
