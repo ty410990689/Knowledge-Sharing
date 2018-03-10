@@ -56,6 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         mAdapter = new HomeViewPagerAdapter(this.getSupportFragmentManager(),this,fragments);
         viewpagerHome.setAdapter(mAdapter);
         viewpagerHome.addOnPageChangeListener(pageChangeListener);
+        viewpagerHome.setOffscreenPageLimit(3);
     }
     @OnClick({R.id.tv_title_android,R.id.tv_title_ios,R.id.tv_title_web})
     public void setOnClickListener(View view) {
@@ -87,9 +88,7 @@ public class HomeActivity extends AppCompatActivity {
     ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            YLog.d("positionOffset: "+positionOffset);
             int wid = tvTitleIos.getWidth();
-            YLog.d("WIDTH : "+wid);
             viewInterlaced.setTranslationX((wid * (positionOffset + position)));
 
         }
