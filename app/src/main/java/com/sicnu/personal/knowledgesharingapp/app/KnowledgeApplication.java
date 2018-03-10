@@ -2,11 +2,21 @@ package com.sicnu.personal.knowledgesharingapp.app;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.facebook.cache.common.CacheKey;
+import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.cache.CacheKeyFactory;
+import com.facebook.imagepipeline.cache.CountingMemoryCache;
+import com.facebook.imagepipeline.cache.ImageCacheStatsTracker;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.request.ImageRequest;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 /**
@@ -14,13 +24,30 @@ import com.sicnu.personal.knowledgesharingapp.utils.YLog;
  */
 
 public class KnowledgeApplication extends Application implements Application.ActivityLifecycleCallbacks{
+    private static Context mContext;
     @Override
     public void onCreate() {
         super.onCreate();
-        Fresco.initialize(this);
-        registerActivityLifecycleCallbacks(this);
-    }
+        mContext = this;
+        DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder(this)
+                .setBaseDirectoryName("KnowLedgeIamgeCache")
 
+        .build();
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setDownsampleEnabled(true)
+                .setMainDiskCacheConfig(diskCacheConfig)
+                .setBitmapsConfig(Bitmap.Config.RGB_565)
+                .build();
+        Fresco.initialize(this,config);
+        registerActivityLifecycleCallbacks(this);
+        Fresco.getImagePipelineFactory().getMainFileCache().trimToMinimum();
+        long CacheSize = Fresco.getImagePipelineFactory().getMainDiskStorageCache().getSize();
+        YLog.d("CacheSize : "+CacheSize);
+
+    }
+    public static Context getAppContext(){
+        return mContext;
+    }
     @Override
     public void onActivityCreated(Activity activity, Bundle bundle) {
         Window window = activity.getWindow();
