@@ -1,6 +1,7 @@
 package com.sicnu.personal.knowledgesharingapp.home.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,11 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
+import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,14 +37,16 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.mDatabean = dataBeen;
     }
 
-    public void loadMoreData(ArrayList<GankKnowledgeDataBean.ResultsBean> moreData) {
+    public void loadMoreData(List<GankKnowledgeDataBean.ResultsBean> moreData) {
         if (this.mDatabean != null) {
-            mDatabean.addAll(moreData);
+            YLog.d("Adapter LoadMore");
+
+            this.mDatabean.addAll(moreData);
             notifyDataSetChanged();
         }
     }
 
-    public void refreshData(ArrayList<GankKnowledgeDataBean.ResultsBean> refreshData) {
+    public void refreshData(List<GankKnowledgeDataBean.ResultsBean> refreshData) {
         if (mDatabean != null) {
             mDatabean.clear();
             mDatabean.addAll(refreshData);
@@ -78,13 +86,22 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 KnowledgeNormalViewHolder normalViewHolder = ((KnowledgeNormalViewHolder) holder);
                 if(mDatabean.get(position).getImages()!=null && mDatabean.get(position).getImages().size()>0) {
                     //加载Json数据中的网络图片
-                    Glide.with(mContext).load(mDatabean.get(position).getImages().get(0)).into(normalViewHolder.ivHomeRcItemBg);
+                    Uri uri = Uri.parse(mDatabean.get(position).getImages().get(0));
+                    DraweeController mDraweeController = Fresco.newDraweeControllerBuilder()
+                            .setAutoPlayAnimations(true)
+                            .setUri(uri)
+                            .build();
+                    normalViewHolder.ivHomeRcItemBg.setController(mDraweeController);
                 }else{
                     //无网络图片时，加载本地图片
                 }
                 normalViewHolder.tvKnowledgeDesc.setText(mDatabean.get(position).getDesc());
                 normalViewHolder.tvKnowledgeTime.setText(mDatabean.get(position).getPublishedAt());
-                normalViewHolder.tvKnowledgeWho.setText(mDatabean.get(position).getWho().toString());
+                if(mDatabean.get(position).getWho()!=null){
+                    normalViewHolder.tvKnowledgeWho.setText(mDatabean.get(position).getWho().toString());
+                }else{
+                    normalViewHolder.tvKnowledgeWho.setText("UnKnown");
+                }
             }
         }
     }
@@ -104,7 +121,7 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
     static class KnowledgeNormalViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_home_rc_item_bg)
-        ImageView ivHomeRcItemBg;
+        SimpleDraweeView ivHomeRcItemBg;
         @BindView(R.id.view_home_rc_item_cover)
         View viewHomeRcItemCover;
         @BindView(R.id.tv_knowledge_desc)
