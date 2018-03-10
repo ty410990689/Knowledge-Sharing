@@ -16,6 +16,8 @@ import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 import com.sicnu.personal.knowledgesharingapp.home.adapter.HomeViewPagerAdapter;
 import com.sicnu.personal.knowledgesharingapp.home.fragment.AndroidFragment;
+import com.sicnu.personal.knowledgesharingapp.home.fragment.IosFragment;
+import com.sicnu.personal.knowledgesharingapp.home.fragment.WebFragment;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import java.util.ArrayList;
@@ -80,9 +82,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private ArrayList<Fragment> initFragments() {
         ArrayList<Fragment> lists = new ArrayList<>();
+        lists.add(new IosFragment());
         lists.add(new AndroidFragment());
-        lists.add(new AndroidFragment());
-        lists.add(new AndroidFragment());
+        lists.add(new WebFragment());
         return lists;
     }
     ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
