@@ -17,6 +17,7 @@ import com.facebook.imagepipeline.cache.ImageCacheStatsTracker;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.request.ImageRequest;
+import com.sicnu.personal.knowledgesharingapp.utils.FrescoUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 /**
@@ -29,15 +30,7 @@ public class KnowledgeApplication extends Application implements Application.Act
     public void onCreate() {
         super.onCreate();
         mContext = this;
-        DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder(this)
-                .setBaseDirectoryName("KnowLedgeIamgeCache")
-
-        .build();
-        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
-                .setDownsampleEnabled(true)
-                .setMainDiskCacheConfig(diskCacheConfig)
-                .setBitmapsConfig(Bitmap.Config.RGB_565)
-                .build();
+        ImagePipelineConfig config = FrescoUtils.getDefaultImagePipelineConfig(this);
         Fresco.initialize(this,config);
         registerActivityLifecycleCallbacks(this);
         Fresco.getImagePipelineFactory().getMainFileCache().trimToMinimum();

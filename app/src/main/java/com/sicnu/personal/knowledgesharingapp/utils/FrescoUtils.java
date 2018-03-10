@@ -1,10 +1,14 @@
 package com.sicnu.personal.knowledgesharingapp.utils;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 
+import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
@@ -24,5 +28,17 @@ public class FrescoUtils {
                 .build();
 
         return mDraweeController;
+    }
+    public static ImagePipelineConfig getDefaultImagePipelineConfig(Context context){
+        DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder(context)
+                .setBaseDirectoryName("KnowLedgeIamgeCache")
+
+                .build();
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(context)
+                .setDownsampleEnabled(true)
+                .setMainDiskCacheConfig(diskCacheConfig)
+                .setBitmapsConfig(Bitmap.Config.RGB_565)
+                .build();
+        return config;
     }
 }
