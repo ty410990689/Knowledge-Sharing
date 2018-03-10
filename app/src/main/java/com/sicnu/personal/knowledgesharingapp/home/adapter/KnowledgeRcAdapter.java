@@ -2,6 +2,7 @@ package com.sicnu.personal.knowledgesharingapp.home.adapter;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.Px;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,8 +15,14 @@ import android.widget.TextView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.sicnu.personal.knowledgesharingapp.R;
+import com.sicnu.personal.knowledgesharingapp.app.KnowledgeApplication;
 import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
+import com.sicnu.personal.knowledgesharingapp.utils.FrescoUtils;
+import com.sicnu.personal.knowledgesharingapp.utils.PxUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import java.util.ArrayList;
@@ -87,13 +94,13 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 if(mDatabean.get(position).getImages()!=null && mDatabean.get(position).getImages().size()>0) {
                     //加载Json数据中的网络图片
                     Uri uri = Uri.parse(mDatabean.get(position).getImages().get(0));
-                    DraweeController mDraweeController = Fresco.newDraweeControllerBuilder()
-                            .setAutoPlayAnimations(true)
-                            .setUri(uri)
-                            .build();
+                    DraweeController mDraweeController = FrescoUtils.getDefaultImageRequest(uri);
                     normalViewHolder.ivHomeRcItemBg.setController(mDraweeController);
+
                 }else{
                     //无网络图片时，加载本地图片
+                    Uri uri = Uri.parse("res:///"+R.mipmap.ic_launcher);
+                    normalViewHolder.ivHomeRcItemBg.setImageURI(uri);
                 }
                 normalViewHolder.tvKnowledgeDesc.setText(mDatabean.get(position).getDesc());
                 normalViewHolder.tvKnowledgeTime.setText(mDatabean.get(position).getPublishedAt());
