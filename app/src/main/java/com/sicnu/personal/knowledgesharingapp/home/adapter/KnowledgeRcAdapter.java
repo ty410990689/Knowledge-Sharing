@@ -37,9 +37,9 @@ import butterknife.ButterKnife;
 
 public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
-    private ArrayList<GankKnowledgeDataBean.ResultsBean> mDatabean;
+    private List<GankKnowledgeDataBean.ResultsBean> mDatabean;
     private KnowledgeClickListenter mListener;
-    public KnowledgeRcAdapter(Context context, ArrayList<GankKnowledgeDataBean.ResultsBean> dataBeen) {
+    public KnowledgeRcAdapter(Context context, List<GankKnowledgeDataBean.ResultsBean> dataBeen) {
         this.mContext = context;
         this.mDatabean = dataBeen;
     }
