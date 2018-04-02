@@ -2,15 +2,18 @@ package com.sicnu.personal.knowledgesharingapp.home.activity;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.percent.PercentFrameLayout;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
@@ -21,7 +24,6 @@ import com.sicnu.personal.knowledgesharingapp.home.fragment.WebFragment;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +33,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2018/3/6 0006.
  */
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.tv_title_web)
     TextView tvTitleWeb;
@@ -45,37 +47,47 @@ public class HomeActivity extends AppCompatActivity {
     View viewInterlaced;
     @BindView(R.id.viewpager_home)
     ViewPager viewpagerHome;
-    @BindView(R.id.activity_main)
-    PercentRelativeLayout activityMain;
+
 
     HomeViewPagerAdapter mAdapter;
+    @BindView(R.id.navigation_view_home)
+    NavigationView navigationViewHome;
+    @BindView(R.id.reltv_main)
+    PercentRelativeLayout reltvMain;
+    @BindView(R.id.drawer_main_layout)
+    DrawerLayout drawerMainLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         ArrayList<Fragment> fragments = initFragments();
-        mAdapter = new HomeViewPagerAdapter(this.getSupportFragmentManager(),this,fragments);
+        mAdapter = new HomeViewPagerAdapter(this.getSupportFragmentManager(), this, fragments);
         viewpagerHome.setAdapter(mAdapter);
         viewpagerHome.addOnPageChangeListener(pageChangeListener);
         viewpagerHome.setOffscreenPageLimit(3);
+        navigationViewHome.setItemIconTintList(null);
+        navigationViewHome.setNavigationItemSelectedListener(this);
+
     }
-    @OnClick({R.id.tv_title_android,R.id.tv_title_ios,R.id.tv_title_web})
+
+    @OnClick({R.id.tv_title_android, R.id.tv_title_ios, R.id.tv_title_web})
     public void setOnClickListener(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_title_android:
-                viewpagerHome.setCurrentItem(Constant.ANDROID_FRAGMENT,true);
+                viewpagerHome.setCurrentItem(Constant.ANDROID_FRAGMENT, true);
                 Toast.makeText(this, "Android", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.tv_title_ios:
                 Toast.makeText(this, "IOS", Toast.LENGTH_SHORT).show();
-                viewpagerHome.setCurrentItem(Constant.IOS_FRAGMENT,true);
+                viewpagerHome.setCurrentItem(Constant.IOS_FRAGMENT, true);
                 break;
 
             case R.id.tv_title_web:
                 Toast.makeText(this, "Web", Toast.LENGTH_SHORT).show();
-                viewpagerHome.setCurrentItem(Constant.WEB_FRAGMENT,true);
+                viewpagerHome.setCurrentItem(Constant.WEB_FRAGMENT, true);
                 break;
         }
     }
@@ -87,6 +99,7 @@ public class HomeActivity extends AppCompatActivity {
         lists.add(new WebFragment());
         return lists;
     }
+
     ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -97,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
-            YLog.d("scro_position: "+position);
+            YLog.d("scro_position: " + position);
         }
 
         @Override
@@ -106,4 +119,9 @@ public class HomeActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Toast.makeText(this, "hese is : "+item.getTitle(), Toast.LENGTH_SHORT).show();
+        return false;
+    }
 }

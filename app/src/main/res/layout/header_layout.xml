@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.percent.PercentFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <TextView
+            app:layout_marginTopPercent="5%"
+            android:id="@+id/tv_user_name"
+            app:layout_widthPercent="60%"
+            app:layout_heightPercent="50%"
+            android:gravity="center"
+            app:layout_marginLeftPercent="40%"
+            />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:scaleType="fitXY"
+            android:id="@+id/iv_header_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/bg_navigation_header"/>
+
+    </android.support.percent.PercentFrameLayout>
+
+</android.support.percent.PercentRelativeLayout>

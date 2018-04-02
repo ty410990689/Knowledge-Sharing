@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/favorite"
+            android:icon="@mipmap/icon_collect_normal"
+            android:title="收藏"/>
+        <item
+            android:id="@+id/mine"
+            android:icon="@mipmap/icon_mine_normal"
+            android:title="我的"/>
+        <item
+            android:id="@+id/photo"
+            android:icon="@mipmap/ic_launcher"
+            android:title="相册"/>
+        <item
+            android:id="@+id/system"
+            android:icon="@mipmap/icon_system_normal"
+            android:title="设置"/>
+
+</menu>
