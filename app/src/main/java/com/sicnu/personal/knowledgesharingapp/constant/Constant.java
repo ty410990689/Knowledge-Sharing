@@ -16,4 +16,7 @@ public class Constant {
     public static final int ANDROID_FRAGMENT=1;
     public static final int IOS_FRAGMENT=0;
     public static final int WEB_FRAGMENT=2;
+
+    //WebUrl跳转key
+    public static final String INTENT_WEB_URL="IntentWebUrl";
 }
