@@ -3,8 +3,10 @@ package com.sicnu.personal.knowledgesharingapp.home.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
@@ -45,11 +47,23 @@ public class WebActivity extends Activity {
         }else{
             webviewKnowledge.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         }
+
+        webviewKnowledge.setWebChromeClient(new WebChromeClient());
+        webviewKnowledge.getSettings().setDomStorageEnabled(true);
+        webviewKnowledge.getSettings().setDatabaseEnabled(true);
+        webviewKnowledge.getSettings().setJavaScriptEnabled(true);
         webviewKnowledge.getSettings().setUseWideViewPort(true);
         webviewKnowledge.getSettings().setLoadWithOverviewMode(true);
         webviewKnowledge.getSettings().setDisplayZoomControls(true);
         webviewKnowledge.getSettings().setSupportMultipleWindows(true);
         webviewKnowledge.getSettings().setSupportZoom(true);
+        webviewKnowledge.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
     }
 
     @Override
