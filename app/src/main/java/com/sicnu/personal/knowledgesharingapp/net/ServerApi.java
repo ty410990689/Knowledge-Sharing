@@ -6,6 +6,7 @@ package com.sicnu.personal.knowledgesharingapp.net;
 
 
 import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
+import com.sicnu.personal.knowledgesharingapp.pretty.model.databean.PrettyDataBean;
 
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -22,7 +23,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public interface ServerApi {
     @Headers("url_type:gank_knowledge")
-    @GET("{type}/{count}/{page}")
+    @GET("api/data/{type}/{count}/{page}")
     Observable<GankKnowledgeDataBean> getGankKnowledgeData(
             @Path("type") String type,
             @Path("count") int count,

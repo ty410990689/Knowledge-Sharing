@@ -6,8 +6,8 @@ package com.sicnu.personal.knowledgesharingapp.constant;
 
 public class Constant {
     public static final String CUSTOM_SERVER_BASE_URL_GUIDE="http://192.168.1.1/";
-    public static final String BASE_URL_GANK = "http://gank.io/api/data/";
-
+    public static final String BASE_URL_GANK = "http://gank.io/";
+    public static final String PRETTY_PICTUR_BASE_URL="http://192.168.1.110/";
     public static final String NET_STATES="netStatus";
     public static final String WIFI_IS_CONNECT="wifiConnect";
     public static final String NET_IS_CONNECT="netConnect";
