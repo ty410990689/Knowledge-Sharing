@@ -72,6 +72,7 @@ public class RetrofitClient {
                         builder.removeHeader("url_type");
                         //匹配获得新的BaseUrl
                         String headerValue = headerValues.get(0);
+                        YLog.d("HeadValue : "+headerValue);
                         HttpUrl newBaseUrl = null;
                         if ("guide".equals(headerValue)) {
                             YLog.d("guide");
@@ -79,11 +80,12 @@ public class RetrofitClient {
                         } else if ("gank_knowledge".equals(headerValue)) {
                             YLog.d("gank_knowledge");
                             newBaseUrl = HttpUrl.parse(Constant.BASE_URL_GANK);
-                        } else{
+                        } else if("pretty_picture".equals(headerValue)){
                             YLog.d("old");
-                            newBaseUrl = oldHttpUrl;
+                            newBaseUrl = HttpUrl.parse(Constant.PRETTY_PICTUR_BASE_URL);;
                         }
                         YLog.d("url : "+newBaseUrl);
+                        YLog.d("old_url : "+oldHttpUrl.url());
                         //重建新的HttpUrl，修改需要修改的url部分
                         HttpUrl newFullUrl = oldHttpUrl
                                 .newBuilder()

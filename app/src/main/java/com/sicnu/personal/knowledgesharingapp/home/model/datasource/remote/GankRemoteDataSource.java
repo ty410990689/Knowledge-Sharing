@@ -19,9 +19,6 @@ import rx.schedulers.Schedulers;
 public class GankRemoteDataSource implements GankDataSource {
     @Override
     public void getRemoteGankData(String type, int count, int page, final GankDataCallBack dataCallBack) {
-
-        String url = count+"/"+page;
-        YLog.d("HttpLogInfo : count is : "+url);
         RetrofitClient.getInstance().createReq(ServerApi.class)
                 .getGankKnowledgeData(type,count,page)
                 .subscribeOn(Schedulers.io())
