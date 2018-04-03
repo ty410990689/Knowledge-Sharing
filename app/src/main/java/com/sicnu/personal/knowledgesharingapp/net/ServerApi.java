@@ -28,4 +28,10 @@ public interface ServerApi {
             @Path("type") String type,
             @Path("count") int count,
             @Path("page") int page);
+
+    @Headers("url_type:pretty_picture")
+    @GET("{page}")
+    Observable<PrettyDataBean> getPrettyPictureData(
+            @Path("page") String page
+    );
 }
