@@ -10,8 +10,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +35,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2018/3/6 0006.
  */
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     @BindView(R.id.tv_title_web)
     TextView tvTitleWeb;
@@ -56,6 +58,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     PercentRelativeLayout reltvMain;
     @BindView(R.id.drawer_main_layout)
     DrawerLayout drawerMainLayout;
+    @BindView(R.id.iv_title_menu)
+    ImageView ivTitleMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +74,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationViewHome.setItemIconTintList(null);
         navigationViewHome.setNavigationItemSelectedListener(this);
 
+
     }
 
-    @OnClick({R.id.tv_title_android, R.id.tv_title_ios, R.id.tv_title_web})
+    @OnClick({R.id.tv_title_android, R.id.tv_title_ios, R.id.tv_title_web,R.id.iv_title_menu})
     public void setOnClickListener(View view) {
         switch (view.getId()) {
             case R.id.tv_title_android:
@@ -88,6 +93,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.tv_title_web:
                 Toast.makeText(this, "Web", Toast.LENGTH_SHORT).show();
                 viewpagerHome.setCurrentItem(Constant.WEB_FRAGMENT, true);
+                break;
+
+            case R.id.iv_title_menu:
+              drawerMainLayout.openDrawer(Gravity.LEFT);
                 break;
         }
     }
@@ -121,7 +130,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Toast.makeText(this, "hese is : "+item.getTitle(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "hese is : " + item.getTitle(), Toast.LENGTH_SHORT).show();
         return false;
     }
+
 }
