@@ -1,6 +1,7 @@
 package com.sicnu.personal.knowledgesharingapp.home.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -23,6 +24,7 @@ import com.sicnu.personal.knowledgesharingapp.home.adapter.HomeViewPagerAdapter;
 import com.sicnu.personal.knowledgesharingapp.home.fragment.AndroidFragment;
 import com.sicnu.personal.knowledgesharingapp.home.fragment.IosFragment;
 import com.sicnu.personal.knowledgesharingapp.home.fragment.WebFragment;
+import com.sicnu.personal.knowledgesharingapp.pretty.activity.PrettyPictureActivity;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import java.util.ArrayList;
@@ -130,7 +132,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Toast.makeText(this, "hese is : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()){
+            case R.id.photo:
+                startActivity(new Intent(this, PrettyPictureActivity.class));
+                break;
+        }
         return false;
     }
 

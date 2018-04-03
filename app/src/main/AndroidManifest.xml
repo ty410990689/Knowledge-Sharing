@@ -24,6 +24,7 @@
         <activity android:name=".home.activity.HomeActivity"></activity>
         <activity android:name=".home.activity.WebActivity"
             android:launchMode="singleTask"></activity>
+        <activity android:name=".pretty.activity.PrettyPictureActivity"></activity>
     </application>
 
 </manifest>
