@@ -45,8 +45,8 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
 
     @BindView(R.id.swl_knowledge_home)
     SwipeRefreshLayout swlKnowledgeHome;
-    private static int lastVisiblePostion = 0;
-    private static int page = 1;
+    private  int lastVisiblePostion = 0;
+    private  int page = 1;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +82,9 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
                         //加载数据
                         mPresenter.getGankRemoteData("Android",Constant.GANK_KNOWLEDGE_COUNT,page,false);
                     }
+                    YLog.d("PPP_lastVisiblePostion: "+lastVisiblePostion);
+                    YLog.d("PPP_getItemCount : "+mAdapter.getItemCount());
+                    YLog.d("PPP_isFade : "+mAdapter.isFade());
                 }
             }
 

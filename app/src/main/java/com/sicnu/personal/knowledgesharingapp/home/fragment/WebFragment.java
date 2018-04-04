@@ -40,8 +40,8 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
     KnowledgeRcAdapter mAdapter;
     ArrayList<GankKnowledgeDataBean.ResultsBean> mDataBean;
     GankRemotePresenter mPresenter;
-    private static int lastVisiblePostion = 0;
-    private static int page = 1;
+    private  int lastVisiblePostion = 0;
+    private  int page = 1;
     private GridLayoutManager manager;
     @BindView(R.id.swl_knowledge_home)
     SwipeRefreshLayout swlKnowledgeHome;
