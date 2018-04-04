@@ -106,10 +106,6 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
             page=1;
             swlKnowledgeHome.setRefreshing(false);
             List<GankKnowledgeDataBean.ResultsBean> data = dataBean.getResults();
-            if(data!=null&&data.size()>0){
-                mDataBean.clear();
-                mDataBean.addAll(data);
-            }
             mAdapter.refreshData(data);
         }
     }

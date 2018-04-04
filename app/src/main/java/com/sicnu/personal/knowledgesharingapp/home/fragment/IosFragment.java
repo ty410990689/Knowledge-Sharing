@@ -104,10 +104,6 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
             page=1;
             swlKnowledgeHome.setRefreshing(false);
             List<GankKnowledgeDataBean.ResultsBean> data = dataBean.getResults();
-            if (data!=null && data.size()>0){
-                mDataBean.clear();
-                mDataBean.addAll(data);
-            }
             mAdapter.refreshData(data);
         }
     }

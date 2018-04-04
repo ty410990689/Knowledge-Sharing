@@ -116,9 +116,6 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
         if (!dataBean.isError()) {
             page+=1;
             List<GankKnowledgeDataBean.ResultsBean> data = dataBean.getResults();
-            if (data != null && data.size() > 0) {
-                mDataBean.addAll(data);
-            }
             mAdapter.loadMoreData(data);
         }
     }
