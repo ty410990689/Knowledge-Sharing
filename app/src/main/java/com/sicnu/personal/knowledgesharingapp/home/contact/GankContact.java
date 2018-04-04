@@ -12,7 +12,7 @@ public interface GankContact {
     interface GankView extends BaseView{
         void showRefreshPage(GankKnowledgeDataBean dataBean);
         void showLoadMorePage(GankKnowledgeDataBean dataBean);
-        void showErrorPage();
+        void showErrorPage(Throwable throwable);
         void showDataPage();
     }
     interface GankPresenter extends BasePresenter{

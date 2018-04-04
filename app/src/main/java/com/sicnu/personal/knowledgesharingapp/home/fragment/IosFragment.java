@@ -121,7 +121,7 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
     }
 
     @Override
-    public void showErrorPage() {
+    public void showErrorPage(Throwable throwable) {
         YLog.d("Error Page");
 
     }

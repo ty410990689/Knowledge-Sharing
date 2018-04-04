@@ -35,7 +35,7 @@ public class GankRemotePresenter implements GankContact.GankPresenter {
 
            @Override
            public void onLoadedfailed(Throwable errorMessage) {
-                gankView.showErrorPage();
+                gankView.showErrorPage(errorMessage);
            }
        });
     }
