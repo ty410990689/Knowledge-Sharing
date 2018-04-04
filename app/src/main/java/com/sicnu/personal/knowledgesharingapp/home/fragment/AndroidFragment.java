@@ -127,7 +127,7 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
     }
 
     @Override
-    public void showErrorPage() {
+    public void showErrorPage(Throwable throwable) {
         YLog.d("Error Page");
 
     }
