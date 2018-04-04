@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 
 public class CommonRcFootVH extends RecyclerView.ViewHolder {
     @BindView(R.id.tv_rc_foot)
-    TextView tvRcFoot;
+    public  TextView tvRcFoot;
     public CommonRcFootVH(View itemView) {
         super(itemView);
             ButterKnife.bind(this, itemView);

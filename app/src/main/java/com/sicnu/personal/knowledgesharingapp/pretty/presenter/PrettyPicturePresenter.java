@@ -31,7 +31,7 @@ public class PrettyPicturePresenter implements PrettyPictureContact.PrettyPresen
 
             @Override
             public void onLoadedFailed(Throwable throwable) {
-                prettyView.showErrorPage();
+                prettyView.showErrorPage(throwable);
             }
         });
     }

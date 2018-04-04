@@ -13,7 +13,7 @@ public interface PrettyPictureContact {
     interface PrettyView extends BaseView{
         void showRefreshPage(PrettyDataBean dataBean);
         void showLoadMorePage(PrettyDataBean dataBean);
-        void showErrorPage();
+        void showErrorPage(Throwable e);
         void showDataPage();
     }
     interface PrettyPresenter extends BasePresenter{

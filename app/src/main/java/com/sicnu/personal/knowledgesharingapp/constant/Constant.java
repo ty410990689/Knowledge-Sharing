@@ -25,4 +25,7 @@ public class Constant {
     public static final int RC_LOAD_TYPE=2;
 
     public static final int GANK_KNOWLEDGE_COUNT=10;
+
+    public static final String NET_IS_ERROR ="Failed to connect to";
+    public static final String NO_MORE_DATA_TO_LOAD="HTTP 404 Not Found";
 }
