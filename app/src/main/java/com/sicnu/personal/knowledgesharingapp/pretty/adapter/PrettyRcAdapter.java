@@ -50,9 +50,12 @@ public class PrettyRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             prettyDataBeen.addAll(dataBean);
             notifyDataSetChanged();
             haveMore=true;
-        }else{YLog.d("DATA is null");
+        }else{
             haveMore=false;
         }
+    }
+    public void setIfHaveMoreData(boolean datamore){
+        haveMore =datamore;
     }
     public int getItemViewType(int position) {
         if(position+1==getItemCount()){
@@ -85,7 +88,7 @@ public class PrettyRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     haveMore =false;
                 }
             }
-            if(haveMore==false){
+            if(haveMore==false && prettyDataBeen.size()>0){
                 ((CommonRcFootVH) holder).tvRcFoot.setText("无新数据可加载...");
             }
         }

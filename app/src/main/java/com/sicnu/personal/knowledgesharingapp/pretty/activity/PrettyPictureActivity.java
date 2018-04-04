@@ -112,7 +112,7 @@ public class PrettyPictureActivity extends AppCompatActivity implements PrettyPi
     @Override
     public void showErrorPage(Throwable throwable) {
         if(throwable.getMessage().equals("HTTP 404 Not Found")){
-
+            adapter.setIfHaveMoreData(false);
         }
     }
 
