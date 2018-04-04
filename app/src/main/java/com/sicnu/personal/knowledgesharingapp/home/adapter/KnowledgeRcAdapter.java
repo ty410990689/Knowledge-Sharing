@@ -20,10 +20,12 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.app.KnowledgeApplication;
+import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
 import com.sicnu.personal.knowledgesharingapp.utils.FrescoUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.PxUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
+import com.sicnu.personal.knowledgesharingapp.viewholder.CommonRcFootVH;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,8 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Context mContext;
     private List<GankKnowledgeDataBean.ResultsBean> mDatabean;
     private KnowledgeClickListenter mListener;
+    private static boolean isFade = false;
+    private static boolean haveMore = false;
     public KnowledgeRcAdapter(Context context, List<GankKnowledgeDataBean.ResultsBean> dataBeen) {
         this.mContext = context;
         this.mDatabean = dataBeen;
@@ -47,12 +51,16 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void loadMoreData(List<GankKnowledgeDataBean.ResultsBean> moreData) {
         if (this.mDatabean != null) {
             YLog.d("Adapter LoadMore");
-
+            haveMore = true;
             this.mDatabean.addAll(moreData);
             notifyDataSetChanged();
+        }else{
+            haveMore= false;
         }
     }
-
+    public boolean isFade(){
+        return isFade;
+    }
     public void refreshData(List<GankKnowledgeDataBean.ResultsBean> refreshData) {
         if (mDatabean != null) {
             mDatabean.clear();
@@ -67,8 +75,11 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        return new KnowledgeNormalViewHolder(LayoutInflater.from(mContext).inflate(R.layout.knowledge_home_recycler_item,parent,false));
+        if(viewType==Constant.RC_NORMAL_TYPE) {
+            return new KnowledgeNormalViewHolder(LayoutInflater.from(mContext).inflate(R.layout.knowledge_home_recycler_item, parent, false));
+        }else{
+            return new CommonRcFootVH(LayoutInflater.from(mContext).inflate(R.layout.layout_recycler_foot, parent, false));
+        }
     }
 
     @Override
@@ -109,17 +120,30 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     normalViewHolder.tvKnowledgeWho.setText("UnKnown");
                 }
             }
+        }else if(holder instanceof CommonRcFootVH){
+            if(haveMore){
+                isFade = false;
+            }else{
+                if(mDatabean.size()>0){
+                    isFade = true;
+                    haveMore =false;
+                }
+            }
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        if(position+1==getItemCount()){
+            return Constant.RC_LOAD_TYPE;
+        }else{
+            return Constant.RC_NORMAL_TYPE;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return mDatabean.size();
+        return mDatabean==null?0:mDatabean.size()+1;
     }
     public  interface KnowledgeClickListenter{
         void onKnowledgeClickListener(View view,int pos);

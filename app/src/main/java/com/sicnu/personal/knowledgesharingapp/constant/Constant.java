@@ -19,4 +19,10 @@ public class Constant {
 
     //WebUrl跳转key
     public static final String INTENT_WEB_URL="IntentWebUrl";
+
+    //Adapter加载更多的常量flag
+    public static final int RC_NORMAL_TYPE=1;
+    public static final int RC_LOAD_TYPE=2;
+
+    public static final int GANK_KNOWLEDGE_COUNT=10;
 }

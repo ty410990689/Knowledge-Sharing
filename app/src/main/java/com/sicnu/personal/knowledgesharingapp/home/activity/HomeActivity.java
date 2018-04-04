@@ -98,8 +98,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.iv_title_menu:
-             // drawerMainLayout.openDrawer(Gravity.LEFT);
-                startActivity(new Intent(this,PrettyPictureActivity.class));
+              drawerMainLayout.openDrawer(Gravity.LEFT);
                 break;
         }
     }

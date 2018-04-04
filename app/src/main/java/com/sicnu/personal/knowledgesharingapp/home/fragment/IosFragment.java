@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,11 +39,12 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
     KnowledgeRcAdapter mAdapter;
     List<GankKnowledgeDataBean.ResultsBean> mDataBean;
     GankRemotePresenter mPresenter;
-
-
+    private static int lastVisiblePostion = 0;
+    private static int page = 1;
     @BindView(R.id.swl_knowledge_home)
     SwipeRefreshLayout swlKnowledgeHome;
 
+    GridLayoutManager manager;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +59,36 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
         mAdapter = new KnowledgeRcAdapter(getActivity(), mDataBean);
         mPresenter = new GankRemotePresenter(this);
         mPresenter.firstRequstData("iOS");
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rcHomeMainItem.setLayoutManager(layoutManager);
+        manager = new GridLayoutManager(getActivity(),1);
+        rcHomeMainItem.setLayoutManager(manager);
         rcHomeMainItem.setAdapter(mAdapter);
         mAdapter.setItemClickListener(this);
         swlKnowledgeHome.setRefreshing(false);
         swlKnowledgeHome.setOnRefreshListener(this);
+        rcHomeMainItem.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState==RecyclerView.SCROLL_STATE_IDLE){
+                    YLog.d("last :"+lastVisiblePostion);
+                    YLog.d("count :"+mAdapter.getItemCount());
+                    if(mAdapter.isFade()==false&&lastVisiblePostion+1==mAdapter.getItemCount()){
+                        //加载数据
+                        mPresenter.getGankRemoteData("iOS",Constant.GANK_KNOWLEDGE_COUNT,page,false);
+                    }
+                    if(mAdapter.isFade()==true&&lastVisiblePostion==mAdapter.getItemCount()){
+                        //加载数据
+                        mPresenter.getGankRemoteData("iOS",Constant.GANK_KNOWLEDGE_COUNT,page,false);
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisiblePostion = manager.findLastVisibleItemPosition();
+            }
+        });
         return view;
     }
 
@@ -75,6 +101,7 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
     @Override
     public void showRefreshPage(GankKnowledgeDataBean dataBean) {
         if(!dataBean.isError()){
+            page=1;
             swlKnowledgeHome.setRefreshing(false);
             List<GankKnowledgeDataBean.ResultsBean> data = dataBean.getResults();
             if (data!=null && data.size()>0){
@@ -88,6 +115,7 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
     @Override
     public void showLoadMorePage(GankKnowledgeDataBean dataBean) {
         if (!dataBean.isError()) {
+            page+=1;
             List<GankKnowledgeDataBean.ResultsBean> data = dataBean.getResults();
             if (data!=null && data.size()>0){
                 mDataBean.addAll(data);

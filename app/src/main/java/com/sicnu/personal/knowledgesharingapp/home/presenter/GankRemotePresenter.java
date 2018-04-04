@@ -1,5 +1,6 @@
 package com.sicnu.personal.knowledgesharingapp.home.presenter;
 
+import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 import com.sicnu.personal.knowledgesharingapp.home.contact.GankContact;
 import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
 import com.sicnu.personal.knowledgesharingapp.home.model.datasource.GankDataSource;
@@ -26,7 +27,7 @@ public class GankRemotePresenter implements GankContact.GankPresenter {
                if (isRefresh){
                    gankView.showRefreshPage(gankKnowledgeDataBean);
                }else{
-                   YLog.d("Here showLoadMorePage");
+                   YLog.d("ASDDSA : "+gankKnowledgeDataBean.getResults().get(0).getDesc());
                    gankView.showLoadMorePage(gankKnowledgeDataBean);
                }
                gankView.showDataPage();
@@ -42,7 +43,7 @@ public class GankRemotePresenter implements GankContact.GankPresenter {
     @Override
     public void firstRequstData(String type) {
         YLog.d("firstRequstData");
-        getGankRemoteData(type,20,1,false);
+        getGankRemoteData(type, Constant.GANK_KNOWLEDGE_COUNT,1,false);
     }
 
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import retrofit2.http.PATCH;
 
 /**
  * Created by Administrator on 2018/3/6 0006.
@@ -38,8 +40,9 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
     KnowledgeRcAdapter mAdapter;
     ArrayList<GankKnowledgeDataBean.ResultsBean> mDataBean;
     GankRemotePresenter mPresenter;
-
-
+    private static int lastVisiblePostion = 0;
+    private static int page = 1;
+    private GridLayoutManager manager;
     @BindView(R.id.swl_knowledge_home)
     SwipeRefreshLayout swlKnowledgeHome;
 
@@ -57,12 +60,34 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
         mAdapter = new KnowledgeRcAdapter(getActivity(), mDataBean);
         mPresenter = new GankRemotePresenter(this);
         mPresenter.firstRequstData("前端");
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rcHomeMainItem.setLayoutManager(layoutManager);
+        manager = new GridLayoutManager(getActivity(),1);
+        rcHomeMainItem.setLayoutManager(manager);
         mAdapter.setItemClickListener(this);
         rcHomeMainItem.setAdapter(mAdapter);
         swlKnowledgeHome.setRefreshing(false);
         swlKnowledgeHome.setOnRefreshListener(this);
+        rcHomeMainItem.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    if (mAdapter.isFade() == false && lastVisiblePostion + 1 == mAdapter.getItemCount()) {
+                        //加载数据
+                        mPresenter.getGankRemoteData("前端", Constant.GANK_KNOWLEDGE_COUNT, page, false);
+                    }
+                    if (mAdapter.isFade() == true && lastVisiblePostion == mAdapter.getItemCount()) {
+                        //加载数据
+                        mPresenter.getGankRemoteData("前端", Constant.GANK_KNOWLEDGE_COUNT, page, false);
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisiblePostion = manager.findLastVisibleItemPosition();
+            }
+        });
         return view;
     }
 
@@ -74,10 +99,11 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
 
     @Override
     public void showRefreshPage(GankKnowledgeDataBean dataBean) {
-        if(!dataBean.isError()){
+        if (!dataBean.isError()) {
+            page = 1;
             swlKnowledgeHome.setRefreshing(false);
             List<GankKnowledgeDataBean.ResultsBean> data = dataBean.getResults();
-            if(data!=null&&data.size()>0){
+            if (data != null && data.size() > 0) {
                 mDataBean.clear();
                 mDataBean.addAll(data);
             }
@@ -88,8 +114,9 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
     @Override
     public void showLoadMorePage(GankKnowledgeDataBean dataBean) {
         if (!dataBean.isError()) {
+            page+=1;
             List<GankKnowledgeDataBean.ResultsBean> data = dataBean.getResults();
-            if (data!=null && data.size()>0){
+            if (data != null && data.size() > 0) {
                 mDataBean.addAll(data);
             }
             mAdapter.loadMoreData(data);
@@ -107,17 +134,18 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
         YLog.d("showDataPage ");
 
     }
+
     //刷新
     @Override
     public void onRefresh() {
         swlKnowledgeHome.setRefreshing(true);
-        mPresenter.getGankRemoteData("前端",10,1,true);
+        mPresenter.getGankRemoteData("前端", 10, 1, true);
     }
 
     @Override
     public void onKnowledgeClickListener(View view, int pos) {
-        Intent intent = new Intent(getActivity(),WebActivity.class);
-        intent.putExtra(Constant.INTENT_WEB_URL,mDataBean.get(pos).getUrl());
+        Intent intent = new Intent(getActivity(), WebActivity.class);
+        intent.putExtra(Constant.INTENT_WEB_URL, mDataBean.get(pos).getUrl());
         startActivity(intent);
     }
 
