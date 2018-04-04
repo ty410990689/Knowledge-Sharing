@@ -13,4 +13,29 @@
         <item name="android:textColor">@color/colorGray</item>
         <item name="android:gravity">center|bottom</item>
     </style>
+    <style name="ToolBarTitleStyle" >
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_gravity">bottom|center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_marginBottom">23dp</item>
+    </style>
+    <style name="ToolbarIvIconBackStyle">
+        <item name="android:layout_marginBottom">23dp</item>
+        <item name="android:src">@mipmap/icon_back</item>
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_gravity">bottom</item>
+        </style>
+    <style name="RcFootTvStyle">
+        <item name="android:textSize"> 15sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:background">@color/colorBlack</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/tv_loading</item>
+    </style>
 </resources>
