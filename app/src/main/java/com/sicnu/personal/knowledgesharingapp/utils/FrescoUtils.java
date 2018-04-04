@@ -17,7 +17,8 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
  */
 
 public class FrescoUtils {
-    public static DraweeController getDefaultImageRequest(Uri uri){
+    public static DraweeController getDefaultImageRequest(String uriPath){
+        Uri uri = Uri.parse(uriPath);
         ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
                 .setResizeOptions(new ResizeOptions(PxUtils.getScreentWidth(),PxUtils.dp2px(180)))
                 .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)

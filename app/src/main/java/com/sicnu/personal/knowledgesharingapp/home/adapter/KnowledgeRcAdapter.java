@@ -93,8 +93,7 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 KnowledgeNormalViewHolder normalViewHolder = ((KnowledgeNormalViewHolder) holder);
                 if(mDatabean.get(position).getImages()!=null && mDatabean.get(position).getImages().size()>0) {
                     //加载Json数据中的网络图片
-                    Uri uri = Uri.parse(mDatabean.get(position).getImages().get(0));
-                    DraweeController mDraweeController = FrescoUtils.getDefaultImageRequest(uri);
+                    DraweeController mDraweeController = FrescoUtils.getDefaultImageRequest(mDatabean.get(position).getImages().get(0));
                     normalViewHolder.ivHomeRcItemBg.setController(mDraweeController);
 
                 }else{
