@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import com.sicnu.personal.knowledgesharingapp.pretty.model.databean.PrettyDataBe
 import com.sicnu.personal.knowledgesharingapp.utils.CommonUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 import com.sicnu.personal.knowledgesharingapp.view.PhotoViewPager;
+import com.tbruyelle.rxpermissions.Permission;
 
 import java.io.File;
 import java.util.List;
@@ -33,6 +35,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 /**
  * Created by Administrator on 2018/4/9 0009.
@@ -122,8 +125,31 @@ public class PhotoViewerActivity extends AppCompatActivity {
                 break;
             case R.id.iv_toolbar_save:
                 currentUrl = data.get(vpPhotoviewer.getCurrentItem()).getImageUrl();
-                id = MDownLoadManager.getInstance(this).addDownLoadTask(currentUrl, CommonUtils.cutUrlGetImageName(currentUrl));
+                checkPermissionDownLoad();
                 break;
+        }
+    }
+
+    private void checkPermissionDownLoad() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            CommonUtils.requestSdPermissiton(PhotoViewerActivity.this, new Action1<Permission>() {
+                @Override
+                public void call(Permission permission) {
+                    if (permission.granted) {
+                        // 用户允许权限
+                        id = MDownLoadManager.getInstance(PhotoViewerActivity.this).addDownLoadTask(currentUrl, CommonUtils.cutUrlGetImageName(currentUrl));
+                    } else if (permission.shouldShowRequestPermissionRationale) {
+                        // 用户拒绝了权限申请
+                        Snackbar.make(rootLayout,"你拒绝了访问",Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        // 用户拒绝，并且选择不再提示
+                        // 可以引导用户进入权限设置界面开启权限
+                        CommonUtils.showDialog(PhotoViewerActivity.this);
+                    }
+                }
+            });
+        }else{
+            id = MDownLoadManager.getInstance(PhotoViewerActivity.this).addDownLoadTask(currentUrl, CommonUtils.cutUrlGetImageName(currentUrl));
         }
     }
 
