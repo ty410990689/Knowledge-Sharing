@@ -5,6 +5,7 @@ package com.sicnu.personal.knowledgesharingapp.net;
 
 
 
+import com.sicnu.personal.knowledgesharingapp.flash.databean.FlashPicDataBean;
 import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
 import com.sicnu.personal.knowledgesharingapp.pretty.model.databean.PrettyDataBean;
 
@@ -33,5 +34,10 @@ public interface ServerApi {
     @GET("{page}")
     Observable<PrettyDataBean> getPrettyPictureData(
             @Path("page") String page
+    );
+    @Headers("url_type:flash_picture")
+    @GET("{info}")
+    Observable<FlashPicDataBean> getFlashPicInfo(
+            @Path("info") String info
     );
 }

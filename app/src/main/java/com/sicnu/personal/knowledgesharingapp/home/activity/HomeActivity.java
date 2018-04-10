@@ -24,6 +24,7 @@ import com.sicnu.personal.knowledgesharingapp.home.adapter.HomeViewPagerAdapter;
 import com.sicnu.personal.knowledgesharingapp.home.fragment.AndroidFragment;
 import com.sicnu.personal.knowledgesharingapp.home.fragment.IosFragment;
 import com.sicnu.personal.knowledgesharingapp.home.fragment.WebFragment;
+import com.sicnu.personal.knowledgesharingapp.net.MDownLoadManager;
 import com.sicnu.personal.knowledgesharingapp.pretty.activity.PrettyPictureActivity;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
@@ -32,6 +33,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static android.R.attr.path;
 
 /**
  * Created by Administrator on 2018/3/6 0006.
@@ -102,7 +105,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
     }
-
+    private String IMAGE_URL="http://sw.bos.baidu.com/sw-search-sp/software/1379d0e8e102a/android-studio-ide-171.4443003-windows.exe";
+    private String IMAGE_NAME=".jpg";
+    private int count = 1;
+    private long id = 0;
     private ArrayList<Fragment> initFragments() {
         ArrayList<Fragment> lists = new ArrayList<>();
         lists.add(new IosFragment());

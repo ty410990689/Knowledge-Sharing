@@ -30,6 +30,7 @@ public class PrettyRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context mContext;
     private static boolean isFade = false;
     private static boolean haveMore = false;
+    private PrettyClickListener mListener;
     public PrettyRcAdapter(Context context, List<PrettyDataBean.ResultsBean> data) {
         this.mContext = context;
         this.prettyDataBeen = data;
@@ -75,7 +76,22 @@ public class PrettyRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        if(mListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mListener.onPrettyClickListener(view,position);
+                }
+            });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    mListener.onPrettyLongClickListener(view,position);
+                    return true;
+                }
+            });
+        }
         if(holder instanceof PrettyPictureViewHolder){
             DraweeController mDraweeController = FrescoUtils.getDefaultImageRequest(prettyDataBeen.get(position).getImageUrl());
             ((PrettyPictureViewHolder) holder).ivPrettyPicture.setController(mDraweeController);
@@ -107,6 +123,15 @@ public class PrettyRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public PrettyPictureViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+    }
+    public interface PrettyClickListener{
+        void onPrettyClickListener(View view,int pos);
+        void onPrettyLongClickListener(View view,int pos);
+    }
+    public void setItemClickListener(PrettyClickListener clickListener){
+        if(clickListener!=null){
+            this.mListener = clickListener;
         }
     }
 }

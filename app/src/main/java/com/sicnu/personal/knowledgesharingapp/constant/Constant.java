@@ -28,4 +28,6 @@ public class Constant {
 
     public static final String NET_IS_ERROR ="Failed to connect to";
     public static final String NO_MORE_DATA_TO_LOAD="HTTP 404 Not Found";
+    public static final String DOWNLOAD_SP_KEY="download";
+    public static final String DOWNLOAD_DEFALUT_PATH="/KnowLedgeShareApp/PrettyPictures/";
 }

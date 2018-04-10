@@ -1,12 +1,13 @@
 package com.sicnu.personal.knowledgesharingapp.pretty.model.databean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2018/4/3 0003.
  */
 
-public class PrettyDataBean {
+public class PrettyDataBean implements Serializable {
 
     /**
      * error : false
@@ -32,7 +33,7 @@ public class PrettyDataBean {
         this.results = results;
     }
 
-    public static class ResultsBean {
+    public static class ResultsBean implements Serializable{
         /**
          * imageUrl : http://pic.meituba.com/uploads/allimg/2017/08/17/38_12876.jpg
          */

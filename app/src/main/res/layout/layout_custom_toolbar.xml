@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.percent.PercentFrameLayout
+        android:background="@color/colorBlack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ImageView
+        app:layout_marginBottomPercent="12%"
+        android:id="@+id/iv_toolbar_back"
+        style="@style/ToolbarTitleIconStyle"
+        android:src="@mipmap/icon_back"
+        android:layout_gravity="start|bottom"
+        app:layout_marginLeftPercent="2%"
+        />
+    <TextView
+        app:layout_marginBottomPercent="12%"
+        android:text="@string/prettypictures"
+        style="@style/ToolbarTextStyle"
+        android:id="@+id/tv_toolbar_title" />
+    <ImageView
+        android:id="@+id/iv_toolbar_save"
+        style="@style/ToolbarTitleIconStyle"
+        android:src="@mipmap/icon_download_normal"
+        android:layout_gravity="right|bottom"
+        app:layout_marginRightPercent="3%"
+        app:layout_marginBottomPercent="12%"
+        />
+    </android.support.percent.PercentFrameLayout>
+</LinearLayout>

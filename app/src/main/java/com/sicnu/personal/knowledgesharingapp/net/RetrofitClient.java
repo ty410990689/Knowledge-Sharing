@@ -81,8 +81,9 @@ public class RetrofitClient {
                             YLog.d("gank_knowledge");
                             newBaseUrl = HttpUrl.parse(Constant.BASE_URL_GANK);
                         } else if("pretty_picture".equals(headerValue)){
-                            YLog.d("old");
-                            newBaseUrl = HttpUrl.parse(Constant.PRETTY_PICTUR_BASE_URL);;
+                            newBaseUrl = HttpUrl.parse(Constant.PRETTY_PICTUR_BASE_URL);
+                        }else if("flash_picture".equals(headerValue)){
+                            newBaseUrl = HttpUrl.parse(Constant.PRETTY_PICTUR_BASE_URL);
                         }
                         YLog.d("url : "+newBaseUrl);
                         YLog.d("old_url : "+oldHttpUrl.url());

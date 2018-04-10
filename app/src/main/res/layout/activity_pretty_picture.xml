@@ -12,20 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <android.support.v7.widget.Toolbar
-
             android:background="@color/colorBlack"
             app:titleTextColor="@color/colorWhite"
             android:id="@+id/toolbar_pretty"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            app:layout_scrollFlags="scroll|enterAlways|snap">
-            <TextView
-                android:text="@string/prettypictures"
-                style="@style/ToolBarTitleStyle"/>
-            <ImageView
-                style="@style/ToolbarIvIconBackStyle"
-                android:id="@+id/iv_pretty_back"
-                />
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            >
+        <include
+            layout="@layout/layout_custom_toolbar"></include>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
     <android.support.v7.widget.RecyclerView

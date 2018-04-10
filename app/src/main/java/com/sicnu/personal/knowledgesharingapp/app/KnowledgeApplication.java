@@ -3,6 +3,7 @@ package com.sicnu.personal.knowledgesharingapp.app;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Window;
@@ -17,6 +18,7 @@ import com.facebook.imagepipeline.cache.ImageCacheStatsTracker;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.request.ImageRequest;
+import com.sicnu.personal.knowledgesharingapp.service.UpdateService;
 import com.sicnu.personal.knowledgesharingapp.utils.FrescoUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
@@ -36,7 +38,7 @@ public class KnowledgeApplication extends Application implements Application.Act
         Fresco.getImagePipelineFactory().getMainFileCache().trimToMinimum();
         long CacheSize = Fresco.getImagePipelineFactory().getMainDiskStorageCache().getSize();
         YLog.d("CacheSize : "+CacheSize);
-
+        startService(new Intent(this, UpdateService.class));
     }
     public static Context getAppContext(){
         return mContext;

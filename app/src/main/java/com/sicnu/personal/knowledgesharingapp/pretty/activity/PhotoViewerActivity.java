@@ -1,0 +1,154 @@
+package com.sicnu.personal.knowledgesharingapp.pretty.activity;
+
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.percent.PercentRelativeLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.sicnu.personal.knowledgesharingapp.R;
+import com.sicnu.personal.knowledgesharingapp.net.MDownLoadManager;
+import com.sicnu.personal.knowledgesharingapp.pretty.adapter.PhotoPagerAdapter;
+import com.sicnu.personal.knowledgesharingapp.pretty.model.databean.PrettyDataBean;
+import com.sicnu.personal.knowledgesharingapp.utils.CommonUtils;
+import com.sicnu.personal.knowledgesharingapp.utils.YLog;
+import com.sicnu.personal.knowledgesharingapp.view.PhotoViewPager;
+
+import java.io.File;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+/**
+ * Created by Administrator on 2018/4/9 0009.
+ */
+
+public class PhotoViewerActivity extends AppCompatActivity {
+    @BindView(R.id.vp_photoviewer)
+    PhotoViewPager vpPhotoviewer;
+    @BindView(R.id.tv_photo_size_desc)
+    TextView tvPhotoSizeDesc;
+    @BindView(R.id.iv_toolbar_back)
+    ImageView ivToolbarBack;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvToolbarTitle;
+    @BindView(R.id.iv_toolbar_save)
+    ImageView ivToolbarSave;
+    @BindView(R.id.toolbar_photoviewer)
+    Toolbar toolbarPhotoviewer;
+    @BindView(R.id.root_layout)
+    PercentRelativeLayout rootLayout;
+    private List<PrettyDataBean.ResultsBean> data;
+    private int position = 0;
+    private PhotoPagerAdapter adapter;
+    private int currentPosition = 0;
+    public static final int SHOW_SIZE_TOAST = 1;
+    public static final int HIDE_SIZE_TOAST = 2;
+    private String currentUrl = "";
+    private   BroadcastReceiver broadcastReceiver;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == SHOW_SIZE_TOAST) {
+
+            } else if (msg.what == HIDE_SIZE_TOAST) {
+                tvPhotoSizeDesc.setVisibility(View.GONE);
+            }
+        }
+    };
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_photo_viewer);
+        ButterKnife.bind(this);
+        initToolbar();
+        registerDownLoadBoradCastReceiver();
+        data = (List<PrettyDataBean.ResultsBean>) getIntent().getSerializableExtra("imageUrlList");
+        position = getIntent().getIntExtra("position", 0);
+        currentPosition = position + 1;
+        tvPhotoSizeDesc.setText(formatSizeString(currentPosition, data.size()));
+        if (data != null) {
+            YLog.d("intent_data : position : " + position + "   size : " + data.size());
+            adapter = new PhotoPagerAdapter(data, this);
+            vpPhotoviewer.setAdapter(adapter);
+            vpPhotoviewer.setCurrentItem(position);
+            vpPhotoviewer.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    currentPosition = position;
+                    mHandler.removeMessages(HIDE_SIZE_TOAST);
+                    tvPhotoSizeDesc.setVisibility(View.VISIBLE);
+                    tvPhotoSizeDesc.setText(formatSizeString(currentPosition + 1, data.size()));
+                    mHandler.sendEmptyMessageDelayed(HIDE_SIZE_TOAST, 1500);
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
+        }
+    }
+
+    @OnClick({R.id.iv_toolbar_back, R.id.iv_toolbar_save})
+    public void setOnCliclListener(View view) {
+        switch (view.getId()) {
+            case R.id.iv_toolbar_back:
+               // this.finish();
+                String path = (String) MDownLoadManager.getInstance(this).queryDownLaodMessage(id,MDownLoadManager.DOWNLOAD_FILE_SAVE_PATH);
+                YLog.d("fileName save Path : "+path);
+                break;
+            case R.id.iv_toolbar_save:
+                currentUrl = data.get(vpPhotoviewer.getCurrentItem()).getImageUrl();
+                id = MDownLoadManager.getInstance(this).addDownLoadTask(currentUrl, CommonUtils.cutUrlGetImageName(currentUrl));
+                break;
+        }
+    }
+
+    private void initToolbar() {
+        tvToolbarTitle.setText(getString(R.string.photoviewer));
+    }
+    private long id = 0;
+    private String formatSizeString(int position, int size) {
+        return String.format("%d / %d", position, size);
+    }
+
+
+
+    private void registerDownLoadBoradCastReceiver() {
+        // 注册广播监听系统的下载完成事件。
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if(intent.getAction()==DownloadManager.ACTION_DOWNLOAD_COMPLETE) {
+                    Snackbar.make(rootLayout, "下载成功", Snackbar.LENGTH_LONG).show();
+                }
+            }
+        };
+        registerReceiver(broadcastReceiver, intentFilter);
+    }
+}

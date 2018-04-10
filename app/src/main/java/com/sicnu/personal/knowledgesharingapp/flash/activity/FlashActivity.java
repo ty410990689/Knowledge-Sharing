@@ -3,6 +3,8 @@ package com.sicnu.personal.knowledgesharingapp.flash.activity;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
@@ -13,9 +15,12 @@ import com.sicnu.personal.knowledgesharingapp.MainActivity;
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 import com.sicnu.personal.knowledgesharingapp.home.activity.HomeActivity;
+import com.sicnu.personal.knowledgesharingapp.utils.CommonUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.NetConnectUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,10 +40,13 @@ public class FlashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_main);
         ButterKnife.bind(this);
-        String flashMode = (String) SharedPreferencesUtils.getParam(this, SharedPreferencesUtils.FILE_NAME_FLASH_SP, "flashMode", "null");
-        String flashFile = (String) SharedPreferencesUtils.getParam(this, SharedPreferencesUtils.FILE_NAME_FLASH_SP, "flashFile", "null");
-        if (!flashMode.equals("null") && !flashFile.equals("null")) {
+        String flashMode = (String) SharedPreferencesUtils.getParam(this, SharedPreferencesUtils.FLASH_MODE, "local");
+        String fileName = (String) SharedPreferencesUtils.getParam(this,SharedPreferencesUtils.FLASH_IMAGE_NAME,"null");
+        YLog.d("flash_log mode : "+flashMode+"  fileName : "+fileName);
+        File flashImage = new File(CommonUtils.getDownLoadLocalPath(this,fileName));
+        if (flashMode.equals("remote")&& !fileName.equals("null")&& flashImage.exists()) {
             //显示后台推送的图片
+            ivFlashMain.setImageURI(Uri.fromFile(flashImage));
         } else {
             //显示默认图片
             ivFlashMain.setBackground(getResources().getDrawable(R.mipmap.bg_default_flash));
