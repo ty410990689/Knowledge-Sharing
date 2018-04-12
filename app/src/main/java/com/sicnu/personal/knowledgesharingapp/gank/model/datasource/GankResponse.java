@@ -1,12 +1,13 @@
-package com.sicnu.personal.knowledgesharingapp.home.model.datasource;
+package com.sicnu.personal.knowledgesharingapp.gank.model.datasource;
 
-import com.sicnu.personal.knowledgesharingapp.home.model.datasource.remote.GankRemoteDataSource;
+
+import com.sicnu.personal.knowledgesharingapp.gank.model.datasource.remote.GankRemoteDataSource;
 
 /**
  * Created by Administrator on 2018/3/6 0006.
  */
 
-public class GankResponse implements GankDataSource{
+public class GankResponse implements GankDataSource {
     GankRemoteDataSource remoteDataSource;
 
     public GankResponse(){

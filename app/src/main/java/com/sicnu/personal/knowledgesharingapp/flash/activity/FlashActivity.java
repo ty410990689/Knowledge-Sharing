@@ -1,9 +1,9 @@
 package com.sicnu.personal.knowledgesharingapp.flash.activity;
 
-import android.animation.ObjectAnimator;
+
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -11,10 +11,11 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
 
-import com.sicnu.personal.knowledgesharingapp.MainActivity;
+
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
-import com.sicnu.personal.knowledgesharingapp.home.activity.HomeActivity;
+
+import com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity.HomeActivity;
 import com.sicnu.personal.knowledgesharingapp.utils.CommonUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.NetConnectUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;

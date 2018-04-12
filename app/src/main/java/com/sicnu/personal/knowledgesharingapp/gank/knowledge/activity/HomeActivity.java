@@ -1,4 +1,4 @@
-package com.sicnu.personal.knowledgesharingapp.home.activity;
+package com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity;
 
 
 import android.content.Intent;
@@ -20,12 +20,13 @@ import android.widget.Toast;
 
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
-import com.sicnu.personal.knowledgesharingapp.home.adapter.HomeViewPagerAdapter;
-import com.sicnu.personal.knowledgesharingapp.home.fragment.AndroidFragment;
-import com.sicnu.personal.knowledgesharingapp.home.fragment.IosFragment;
-import com.sicnu.personal.knowledgesharingapp.home.fragment.WebFragment;
-import com.sicnu.personal.knowledgesharingapp.net.MDownLoadManager;
+
+import com.sicnu.personal.knowledgesharingapp.gank.knowledge.adapter.HomeViewPagerAdapter;
+import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.AndroidFragment;
+import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.IosFragment;
+import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.WebFragment;
 import com.sicnu.personal.knowledgesharingapp.pretty.activity.PrettyPictureActivity;
+
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import java.util.ArrayList;
@@ -33,8 +34,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.R.attr.path;
 
 /**
  * Created by Administrator on 2018/3/6 0006.
@@ -139,8 +138,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.photo:
+            case R.id.nav_photo:
                 startActivity(new Intent(this, PrettyPictureActivity.class));
+                break;
+
+            case R.id.nav_favorite:
+
                 break;
         }
         return false;

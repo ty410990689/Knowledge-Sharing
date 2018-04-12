@@ -19,7 +19,9 @@ public class Constant {
 
     //WebUrl跳转key
     public static final String INTENT_WEB_URL="IntentWebUrl";
-
+    public static final String INTENT_WEB_TYPE="IntentWebType";
+    public static final int INTENT_WEB_VIDEO_TYPE=1;
+    public static final int INTENT_WEB_KNOWLEDGE_TYPE=2;
     //Adapter加载更多的常量flag
     public static final int RC_NORMAL_TYPE=1;
     public static final int RC_LOAD_TYPE=2;

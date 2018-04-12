@@ -10,6 +10,7 @@
     <application
         android:name=".app.KnowledgeApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -22,11 +23,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".home.activity.HomeActivity"></activity>
-        <activity android:name=".home.activity.WebActivity"
+        <activity android:name=".gank.knowledge.activity.HomeActivity"></activity>
+        <activity android:name=".gank.knowledge.activity.WebActivity"
             android:launchMode="singleTask"></activity>
         <activity android:name=".pretty.activity.PrettyPictureActivity"></activity>
         <activity android:name=".pretty.activity.PhotoViewerActivity"></activity>
+        <activity android:name=".relax.activity.RelaxMediaActivity"></activity>
         <service android:name=".service.UpdateService"></service>
     </application>
 

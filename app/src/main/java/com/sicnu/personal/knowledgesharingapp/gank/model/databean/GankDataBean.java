@@ -1,4 +1,4 @@
-package com.sicnu.personal.knowledgesharingapp.home.model.databean;
+package com.sicnu.personal.knowledgesharingapp.gank.model.databean;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2018/3/6 0006.
  */
 
-public class GankKnowledgeDataBean {
+public class GankDataBean {
 
     /**
      * error : false

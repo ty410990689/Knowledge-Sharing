@@ -1,33 +1,25 @@
-package com.sicnu.personal.knowledgesharingapp.home.adapter;
+package com.sicnu.personal.knowledgesharingapp.gank.knowledge.adapter;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.Px;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.common.ResizeOptions;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.sicnu.personal.knowledgesharingapp.R;
-import com.sicnu.personal.knowledgesharingapp.app.KnowledgeApplication;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
-import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
+
+import com.sicnu.personal.knowledgesharingapp.gank.model.databean.GankDataBean;
 import com.sicnu.personal.knowledgesharingapp.utils.FrescoUtils;
-import com.sicnu.personal.knowledgesharingapp.utils.PxUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 import com.sicnu.personal.knowledgesharingapp.viewholder.CommonRcFootVH;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,16 +31,16 @@ import butterknife.ButterKnife;
 
 public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
-    private List<GankKnowledgeDataBean.ResultsBean> mDatabean;
+    private List<GankDataBean.ResultsBean> mDatabean;
     private KnowledgeClickListenter mListener;
     private static boolean isFade = false;
     private static boolean haveMore = false;
-    public KnowledgeRcAdapter(Context context, List<GankKnowledgeDataBean.ResultsBean> dataBeen) {
+    public KnowledgeRcAdapter(Context context, List<GankDataBean.ResultsBean> dataBeen) {
         this.mContext = context;
         this.mDatabean = dataBeen;
     }
 
-    public void loadMoreData(List<GankKnowledgeDataBean.ResultsBean> moreData) {
+    public void loadMoreData(List<GankDataBean.ResultsBean> moreData) {
         if (this.mDatabean != null) {
             YLog.d("Adapter LoadMore");
             haveMore = true;
@@ -61,7 +53,7 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public boolean isFade(){
         return isFade;
     }
-    public void refreshData(List<GankKnowledgeDataBean.ResultsBean> refreshData) {
+    public void refreshData(List<GankDataBean.ResultsBean> refreshData) {
         if (mDatabean != null) {
             mDatabean.clear();
             mDatabean.addAll(refreshData);
@@ -146,8 +138,8 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return mDatabean==null?0:mDatabean.size()+1;
     }
     public  interface KnowledgeClickListenter{
-        void onKnowledgeClickListener(View view,int pos);
-        void onKnowledgeLongClickListener(View view,int pos);
+        void onKnowledgeClickListener(View view, int pos);
+        void onKnowledgeLongClickListener(View view, int pos);
     }
     static class KnowledgeNormalViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_home_rc_item_bg)

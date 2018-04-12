@@ -10,7 +10,7 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
-import com.sicnu.personal.knowledgesharingapp.home.adapter.KnowledgeRcAdapter;
+
 import com.sicnu.personal.knowledgesharingapp.pretty.model.databean.PrettyDataBean;
 import com.sicnu.personal.knowledgesharingapp.utils.FrescoUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;

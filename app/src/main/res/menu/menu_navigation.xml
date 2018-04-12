@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
         <item
-            android:id="@+id/favorite"
+            android:id="@+id/nav_favorite"
             android:icon="@mipmap/icon_collect_normal"
             android:title="收藏"/>
         <item
-            android:id="@+id/mine"
+            android:id="@+id/nav_mine"
             android:icon="@mipmap/icon_mine_normal"
             android:title="我的"/>
         <item
-            android:id="@+id/photo"
+            android:id="@+id/nav_photo"
             android:icon="@mipmap/icon_pretty"
             android:title="美图"/>
         <item
-            android:id="@+id/system"
+            android:id="@+id/nav_system"
             android:icon="@mipmap/icon_system_normal"
             android:title="设置"/>
 

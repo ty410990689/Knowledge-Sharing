@@ -1,4 +1,4 @@
-package com.sicnu.personal.knowledgesharingapp.home.adapter;
+package com.sicnu.personal.knowledgesharingapp.gank.knowledge.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

@@ -1,4 +1,4 @@
-package com.sicnu.personal.knowledgesharingapp.home.fragment;
+package com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +13,13 @@ import android.view.ViewGroup;
 
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
-import com.sicnu.personal.knowledgesharingapp.home.activity.WebActivity;
-import com.sicnu.personal.knowledgesharingapp.home.adapter.KnowledgeRcAdapter;
-import com.sicnu.personal.knowledgesharingapp.home.contact.GankContact;
-import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
-import com.sicnu.personal.knowledgesharingapp.home.presenter.GankRemotePresenter;
+
+import com.sicnu.personal.knowledgesharingapp.gank.contact.GankContact;
+import com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity.WebActivity;
+
+import com.sicnu.personal.knowledgesharingapp.gank.knowledge.adapter.KnowledgeRcAdapter;
+import com.sicnu.personal.knowledgesharingapp.gank.model.databean.GankDataBean;
+import com.sicnu.personal.knowledgesharingapp.gank.presenter.GankRemotePresenter;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import java.util.ArrayList;
@@ -27,25 +28,24 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import retrofit2.http.PATCH;
 
 /**
  * Created by Administrator on 2018/3/6 0006.
  */
 
-public class WebFragment extends Fragment implements GankContact.GankView, SwipeRefreshLayout.OnRefreshListener, KnowledgeRcAdapter.KnowledgeClickListenter {
+public class AndroidFragment extends Fragment implements GankContact.GankView, SwipeRefreshLayout.OnRefreshListener, KnowledgeRcAdapter.KnowledgeClickListenter {
     @BindView(R.id.rc_home_main_item)
     RecyclerView rcHomeMainItem;
     Unbinder unbinder;
     KnowledgeRcAdapter mAdapter;
-    ArrayList<GankKnowledgeDataBean.ResultsBean> mDataBean;
+    List<GankDataBean.ResultsBean> mDataBean;
     GankRemotePresenter mPresenter;
-    private  int lastVisiblePostion = 0;
-    private  int page = 1;
     private GridLayoutManager manager;
+
     @BindView(R.id.swl_knowledge_home)
     SwipeRefreshLayout swlKnowledgeHome;
-
+    private  int lastVisiblePostion = 0;
+    private  int page = 1;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +59,7 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
         mDataBean = new ArrayList<>();
         mAdapter = new KnowledgeRcAdapter(getActivity(), mDataBean);
         mPresenter = new GankRemotePresenter(this);
-        mPresenter.firstRequstData("前端");
+        mPresenter.firstRequstData("Android");
         manager = new GridLayoutManager(getActivity(),1);
         rcHomeMainItem.setLayoutManager(manager);
         mAdapter.setItemClickListener(this);
@@ -70,15 +70,20 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    if (mAdapter.isFade() == false && lastVisiblePostion + 1 == mAdapter.getItemCount()) {
+                if(newState==RecyclerView.SCROLL_STATE_IDLE){
+                    YLog.d("last :"+lastVisiblePostion);
+                    YLog.d("count :"+mAdapter.getItemCount());
+                    if(mAdapter.isFade()==false&&lastVisiblePostion+1==mAdapter.getItemCount()){
                         //加载数据
-                        mPresenter.getGankRemoteData("前端", Constant.GANK_KNOWLEDGE_COUNT, page, false);
+                        mPresenter.getGankRemoteData("Android",Constant.GANK_KNOWLEDGE_COUNT,page,false);
                     }
-                    if (mAdapter.isFade() == true && lastVisiblePostion == mAdapter.getItemCount()) {
+                    if(mAdapter.isFade()==true&&lastVisiblePostion==mAdapter.getItemCount()){
                         //加载数据
-                        mPresenter.getGankRemoteData("前端", Constant.GANK_KNOWLEDGE_COUNT, page, false);
+                        mPresenter.getGankRemoteData("Android",Constant.GANK_KNOWLEDGE_COUNT,page,false);
                     }
+                    YLog.d("PPP_lastVisiblePostion: "+lastVisiblePostion);
+                    YLog.d("PPP_getItemCount : "+mAdapter.getItemCount());
+                    YLog.d("PPP_isFade : "+mAdapter.isFade());
                 }
             }
 
@@ -98,24 +103,24 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
     }
 
     @Override
-    public void showRefreshPage(GankKnowledgeDataBean dataBean) {
-        if (!dataBean.isError()) {
-            page = 1;
+    public void showRefreshPage(GankDataBean dataBean) {
+        if(!dataBean.isError()){
+            page=1;
             swlKnowledgeHome.setRefreshing(false);
-            List<GankKnowledgeDataBean.ResultsBean> data = dataBean.getResults();
-            if (data != null && data.size() > 0) {
-                mDataBean.clear();
-                mDataBean.addAll(data);
-            }
+            List<GankDataBean.ResultsBean> data = dataBean.getResults();
             mAdapter.refreshData(data);
         }
     }
 
     @Override
-    public void showLoadMorePage(GankKnowledgeDataBean dataBean) {
+    public void showLoadMorePage(GankDataBean dataBean) {
         if (!dataBean.isError()) {
+            YLog.d("LoadMore");
             page+=1;
-            List<GankKnowledgeDataBean.ResultsBean> data = dataBean.getResults();
+            List<GankDataBean.ResultsBean> data = dataBean.getResults();
+            if (data!=null && data.size()>0){
+                mDataBean.addAll(data);
+            }
             mAdapter.loadMoreData(data);
         }
     }
@@ -131,18 +136,18 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
         YLog.d("showDataPage ");
 
     }
-
-    //刷新
+//刷新
     @Override
     public void onRefresh() {
         swlKnowledgeHome.setRefreshing(true);
-        mPresenter.getGankRemoteData("前端", 10, 1, true);
+        mPresenter.getGankRemoteData("Android",10,1,true);
     }
 
     @Override
     public void onKnowledgeClickListener(View view, int pos) {
-        Intent intent = new Intent(getActivity(), WebActivity.class);
-        intent.putExtra(Constant.INTENT_WEB_URL, mDataBean.get(pos).getUrl());
+        Intent intent = new Intent(getActivity(),WebActivity.class);
+        intent.putExtra(Constant.INTENT_WEB_URL,mDataBean.get(pos).getUrl());
+        intent.putExtra(Constant.INTENT_WEB_TYPE,Constant.INTENT_WEB_KNOWLEDGE_TYPE);
         startActivity(intent);
     }
 

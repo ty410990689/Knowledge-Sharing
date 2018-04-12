@@ -1,11 +1,11 @@
-package com.sicnu.personal.knowledgesharingapp.home.presenter;
+package com.sicnu.personal.knowledgesharingapp.gank.presenter;
 
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
-import com.sicnu.personal.knowledgesharingapp.home.contact.GankContact;
-import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
-import com.sicnu.personal.knowledgesharingapp.home.model.datasource.GankDataSource;
-import com.sicnu.personal.knowledgesharingapp.home.model.datasource.GankResponse;
-import com.sicnu.personal.knowledgesharingapp.utils.YLog;
+import com.sicnu.personal.knowledgesharingapp.gank.contact.GankContact;
+import com.sicnu.personal.knowledgesharingapp.gank.model.databean.GankDataBean;
+import com.sicnu.personal.knowledgesharingapp.gank.model.datasource.GankDataSource;
+import com.sicnu.personal.knowledgesharingapp.gank.model.datasource.GankResponse;
+
 
 /**
  * Created by Administrator on 2018/3/6 0006.
@@ -22,13 +22,11 @@ public class GankRemotePresenter implements GankContact.GankPresenter {
     public void getGankRemoteData(String type,int count, int page, final boolean isRefresh) {
        gankResponse.getRemoteGankData(type,count, page, new GankDataSource.GankDataCallBack() {
            @Override
-           public void onLoadedSuccessful(GankKnowledgeDataBean gankKnowledgeDataBean) {
-               YLog.d("Here showLoadMorePage");
+           public void onLoadedSuccessful(GankDataBean gankDataBean) {
                if (isRefresh){
-                   gankView.showRefreshPage(gankKnowledgeDataBean);
+                   gankView.showRefreshPage(gankDataBean);
                }else{
-                   YLog.d("ASDDSA : "+gankKnowledgeDataBean.getResults().get(0).getDesc());
-                   gankView.showLoadMorePage(gankKnowledgeDataBean);
+                   gankView.showLoadMorePage(gankDataBean);
                }
                gankView.showDataPage();
            }
@@ -42,7 +40,6 @@ public class GankRemotePresenter implements GankContact.GankPresenter {
 
     @Override
     public void firstRequstData(String type) {
-        YLog.d("firstRequstData");
         getGankRemoteData(type, Constant.GANK_KNOWLEDGE_COUNT,1,false);
     }
 

@@ -1,13 +1,13 @@
-package com.sicnu.personal.knowledgesharingapp.home.model.datasource.remote;
+package com.sicnu.personal.knowledgesharingapp.gank.model.datasource.remote;
 
-import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
-import com.sicnu.personal.knowledgesharingapp.home.model.datasource.GankDataSource;
+
+import com.sicnu.personal.knowledgesharingapp.gank.model.databean.GankDataBean;
+import com.sicnu.personal.knowledgesharingapp.gank.model.datasource.GankDataSource;
 import com.sicnu.personal.knowledgesharingapp.net.RetrofitClient;
 import com.sicnu.personal.knowledgesharingapp.net.ServerApi;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import rx.Observer;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -23,7 +23,7 @@ public class GankRemoteDataSource implements GankDataSource {
                 .getGankKnowledgeData(type,count,page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<GankKnowledgeDataBean>() {
+                .subscribe(new Observer<GankDataBean>() {
                     @Override
                     public void onCompleted() {
                         YLog.d("Gank Datas is onCompleted : ");
@@ -36,9 +36,9 @@ public class GankRemoteDataSource implements GankDataSource {
                     }
 
                     @Override
-                    public void onNext(GankKnowledgeDataBean gankKnowledgeDataBean) {
-                        dataCallBack.onLoadedSuccessful(gankKnowledgeDataBean);
-                        YLog.d("Gank Datas is OK : "+gankKnowledgeDataBean.getResults().size());
+                    public void onNext(GankDataBean gankDataBean) {
+                        dataCallBack.onLoadedSuccessful(gankDataBean);
+                        YLog.d("Gank Datas is OK : "+ gankDataBean.getResults().size());
                     }
                 });
     }

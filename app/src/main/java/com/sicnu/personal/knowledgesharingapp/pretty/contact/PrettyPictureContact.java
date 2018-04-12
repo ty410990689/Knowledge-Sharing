@@ -2,7 +2,7 @@ package com.sicnu.personal.knowledgesharingapp.pretty.contact;
 
 import com.sicnu.personal.knowledgesharingapp.base.basepresenter.BasePresenter;
 import com.sicnu.personal.knowledgesharingapp.base.baseview.BaseView;
-import com.sicnu.personal.knowledgesharingapp.home.model.databean.GankKnowledgeDataBean;
+
 import com.sicnu.personal.knowledgesharingapp.pretty.model.databean.PrettyDataBean;
 
 /**

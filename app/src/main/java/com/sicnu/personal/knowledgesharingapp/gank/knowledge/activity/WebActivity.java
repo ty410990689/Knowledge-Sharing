@@ -1,6 +1,7 @@
-package com.sicnu.personal.knowledgesharingapp.home.activity;
+package com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebChromeClient;
@@ -23,12 +24,14 @@ public class WebActivity extends Activity {
     @BindView(R.id.webview_knowledge)
     WebView webviewKnowledge;
 
+    int intentType = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
         ButterKnife.bind(this);
         String intentUrl = getIntent().getStringExtra(Constant.INTENT_WEB_URL);
+        intentType = getIntent().getIntExtra(Constant.INTENT_WEB_TYPE,Constant.INTENT_WEB_KNOWLEDGE_TYPE);
         initWebView();
         if(intentUrl!=null && !intentUrl.equals("")){
             try {
@@ -52,6 +55,11 @@ public class WebActivity extends Activity {
         webviewKnowledge.getSettings().setDomStorageEnabled(true);
         webviewKnowledge.getSettings().setDatabaseEnabled(true);
         webviewKnowledge.getSettings().setJavaScriptEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            webviewKnowledge.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+        webviewKnowledge.getSettings().setMediaPlaybackRequiresUserGesture(true);
+        webviewKnowledge.getSettings().setPluginState(WebSettings.PluginState.ON);
         webviewKnowledge.getSettings().setUseWideViewPort(true);
         webviewKnowledge.getSettings().setLoadWithOverviewMode(true);
         webviewKnowledge.getSettings().setDisplayZoomControls(true);
@@ -68,7 +76,7 @@ public class WebActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode==KeyEvent.KEYCODE_BACK && webviewKnowledge.canGoBack()){
+        if(keyCode==KeyEvent.KEYCODE_BACK && webviewKnowledge.canGoBack() && intentType!=Constant.INTENT_WEB_VIDEO_TYPE){
             webviewKnowledge.goBack();
             return true;
         }else{
