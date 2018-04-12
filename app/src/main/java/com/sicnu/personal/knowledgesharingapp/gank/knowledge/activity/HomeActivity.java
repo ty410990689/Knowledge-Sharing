@@ -25,6 +25,7 @@ import com.sicnu.personal.knowledgesharingapp.gank.knowledge.adapter.HomeViewPag
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.AndroidFragment;
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.IosFragment;
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.WebFragment;
+import com.sicnu.personal.knowledgesharingapp.gank.relaxmedia.activity.RelaxMediaActivity;
 import com.sicnu.personal.knowledgesharingapp.pretty.activity.PrettyPictureActivity;
 
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
@@ -143,7 +144,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_favorite:
-
+                Intent intent = new Intent(this,RelaxMediaActivity.class);
+                intent.putExtra(Constant.INTENT_WEB_URL,"https://v.qq.com/x/page/m0377ib544o.html?start=1");
+                intent.putExtra(Constant.INTENT_WEB_TYPE,Constant.INTENT_WEB_VIDEO_TYPE);
+                startActivity(intent);
                 break;
         }
         return false;

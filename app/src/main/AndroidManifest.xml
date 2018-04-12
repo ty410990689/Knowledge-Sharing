@@ -28,7 +28,7 @@
             android:launchMode="singleTask"></activity>
         <activity android:name=".pretty.activity.PrettyPictureActivity"></activity>
         <activity android:name=".pretty.activity.PhotoViewerActivity"></activity>
-        <activity android:name=".relax.activity.RelaxMediaActivity"></activity>
+        <activity android:name=".gank.relaxmedia.activity.RelaxMediaActivity"></activity>
         <service android:name=".service.UpdateService"></service>
     </application>
 
