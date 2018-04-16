@@ -71,4 +71,8 @@ public class PhotoPagerAdapter extends PagerAdapter {
         super.setPrimaryItem(container, position, object);
         mCurrentView = (View) object;
     }
+
+    public View getmCurrentView() {
+        return mCurrentView;
+    }
 }
