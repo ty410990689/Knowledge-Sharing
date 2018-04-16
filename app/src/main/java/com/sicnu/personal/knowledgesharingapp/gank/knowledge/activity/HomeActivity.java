@@ -2,9 +2,11 @@ package com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity;
 
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.percent.PercentFrameLayout;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v4.app.Fragment;
@@ -26,15 +28,21 @@ import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.AndroidFra
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.IosFragment;
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.WebFragment;
 import com.sicnu.personal.knowledgesharingapp.gank.relaxmedia.activity.RelaxMediaActivity;
+import com.sicnu.personal.knowledgesharingapp.net.MDownLoadManager;
+import com.sicnu.personal.knowledgesharingapp.pretty.activity.PhotoViewerActivity;
 import com.sicnu.personal.knowledgesharingapp.pretty.activity.PrettyPictureActivity;
 
+import com.sicnu.personal.knowledgesharingapp.utils.CommonUtils;
+import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
+import com.tbruyelle.rxpermissions.Permission;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 /**
  * Created by Administrator on 2018/3/6 0006.
@@ -143,12 +151,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, PrettyPictureActivity.class));
                 break;
 
-            case R.id.nav_favorite:
-                Intent intent = new Intent(this,RelaxMediaActivity.class);
-                intent.putExtra(Constant.INTENT_WEB_URL,"https://v.qq.com/x/page/m0377ib544o.html?start=1");
-                intent.putExtra(Constant.INTENT_WEB_TYPE,Constant.INTENT_WEB_VIDEO_TYPE);
-                startActivity(intent);
+            case R.id.nav_relax_media:
+                startActivity(new Intent(this, RelaxMediaActivity.class));
                 break;
+
         }
         return false;
     }

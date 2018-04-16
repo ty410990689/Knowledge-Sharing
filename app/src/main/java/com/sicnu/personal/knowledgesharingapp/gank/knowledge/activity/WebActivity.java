@@ -1,6 +1,10 @@
 package com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -12,6 +16,7 @@ import android.webkit.WebViewClient;
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 import com.sicnu.personal.knowledgesharingapp.utils.NetConnectUtils;
+import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +28,7 @@ import butterknife.ButterKnife;
 public class WebActivity extends Activity {
     @BindView(R.id.webview_knowledge)
     WebView webviewKnowledge;
-
+    String oldUrl ;
     int intentType = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,7 @@ public class WebActivity extends Activity {
         setContentView(R.layout.activity_web);
         ButterKnife.bind(this);
         String intentUrl = getIntent().getStringExtra(Constant.INTENT_WEB_URL);
+        YLog.d("WebView : "+intentUrl);
         intentType = getIntent().getIntExtra(Constant.INTENT_WEB_TYPE,Constant.INTENT_WEB_KNOWLEDGE_TYPE);
         initWebView();
         if(intentUrl!=null && !intentUrl.equals("")){
@@ -68,8 +74,29 @@ public class WebActivity extends Activity {
         webviewKnowledge.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
+
+               if(url==null){return false;}
+                try {
+                    if (url.startsWith("http:") || url.startsWith("https:")) {
+                        YLog.d("WebView url 111: ");
+                        oldUrl = url;
+                        view.loadUrl(url);
+                        return true;
+                    } else {
+                        YLog.d("WebView url 222: ");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(oldUrl));
+                        startActivity(intent);
+                        ComponentName componentName = new ComponentName("com.sicnu.personal.knowledgesharingapp","com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity.WebActivity");
+                        Intent newIntent = new Intent();
+                        newIntent.setComponent(componentName);
+                        startActivity(newIntent);
+                        return true;
+                    }
+                }catch (Exception e){
+                    YLog.d("WebView : "+e.getLocalizedMessage());
+                    e.printStackTrace();
+                    return false;
+                }
             }
         });
     }
@@ -83,5 +110,30 @@ public class WebActivity extends Activity {
             return super.onKeyDown(keyCode, event);
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(webviewKnowledge!=null){
+            webviewKnowledge.onResume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(webviewKnowledge!=null){
+            webviewKnowledge.onPause();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(webviewKnowledge!=null){
+            webviewKnowledge.destroy();
+            webviewKnowledge=null;
+        }
     }
 }
