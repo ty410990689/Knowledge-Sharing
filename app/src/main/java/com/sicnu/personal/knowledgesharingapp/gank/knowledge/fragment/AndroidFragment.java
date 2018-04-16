@@ -13,14 +13,11 @@ import android.view.ViewGroup;
 
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
-
 import com.sicnu.personal.knowledgesharingapp.gank.contact.GankContact;
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity.WebActivity;
-
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.adapter.KnowledgeRcAdapter;
 import com.sicnu.personal.knowledgesharingapp.gank.model.databean.GankDataBean;
 import com.sicnu.personal.knowledgesharingapp.gank.presenter.GankRemotePresenter;
-import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import java.util.ArrayList;
 import java.util.List;

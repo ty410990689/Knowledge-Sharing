@@ -1,6 +1,5 @@
 package com.sicnu.personal.knowledgesharingapp.viewholder;
 
-import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;

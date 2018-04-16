@@ -2,11 +2,9 @@ package com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity;
 
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.percent.PercentFrameLayout;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v4.app.Fragment;
@@ -22,27 +20,19 @@ import android.widget.Toast;
 
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
-
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.adapter.HomeViewPagerAdapter;
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.AndroidFragment;
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.IosFragment;
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.WebFragment;
 import com.sicnu.personal.knowledgesharingapp.gank.relaxmedia.activity.RelaxMediaActivity;
-import com.sicnu.personal.knowledgesharingapp.net.MDownLoadManager;
-import com.sicnu.personal.knowledgesharingapp.pretty.activity.PhotoViewerActivity;
 import com.sicnu.personal.knowledgesharingapp.pretty.activity.PrettyPictureActivity;
-
-import com.sicnu.personal.knowledgesharingapp.utils.CommonUtils;
-import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
-import com.tbruyelle.rxpermissions.Permission;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.functions.Action1;
 
 /**
  * Created by Administrator on 2018/3/6 0006.

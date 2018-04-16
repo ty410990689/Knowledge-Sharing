@@ -1,7 +1,6 @@
 package com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;

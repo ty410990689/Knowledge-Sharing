@@ -6,11 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 
 import com.sicnu.personal.knowledgesharingapp.flash.databean.FlashPicDataBean;
 import com.sicnu.personal.knowledgesharingapp.net.MDownLoadManager;
@@ -21,11 +18,8 @@ import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import java.io.File;
-import java.util.List;
 
-import rx.Observable;
 import rx.Observer;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 

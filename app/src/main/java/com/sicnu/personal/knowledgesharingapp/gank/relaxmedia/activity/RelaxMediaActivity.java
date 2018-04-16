@@ -18,7 +18,6 @@ import com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity.WebActivit
 import com.sicnu.personal.knowledgesharingapp.gank.model.databean.GankDataBean;
 import com.sicnu.personal.knowledgesharingapp.gank.presenter.GankRemotePresenter;
 import com.sicnu.personal.knowledgesharingapp.gank.relaxmedia.adapter.RelaxMediaRcAdapter;
-import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -19,7 +18,6 @@ import com.sicnu.personal.knowledgesharingapp.gank.model.databean.GankDataBean;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 import com.sicnu.personal.knowledgesharingapp.viewholder.CommonRcFootVH;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
