@@ -58,7 +58,7 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
         mDataBean = new ArrayList<>();
         mAdapter = new KnowledgeRcAdapter(getActivity(), mDataBean);
         mPresenter = new GankRemotePresenter(this);
-        mPresenter.firstRequstData("前端");
+        mPresenter.firstRequstData(getString(R.string.knowledge_web));
         manager = new GridLayoutManager(getActivity(),1);
         rcHomeMainItem.setLayoutManager(manager);
         mAdapter.setItemClickListener(this);
@@ -72,11 +72,11 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     if (mAdapter.isFade() == false && lastVisiblePostion + 1 == mAdapter.getItemCount()) {
                         //加载数据
-                        mPresenter.getGankRemoteData("前端", Constant.GANK_KNOWLEDGE_COUNT, page, false);
+                        mPresenter.getGankRemoteData(getString(R.string.knowledge_web), Constant.GANK_KNOWLEDGE_COUNT, page, false);
                     }
                     if (mAdapter.isFade() == true && lastVisiblePostion == mAdapter.getItemCount()) {
                         //加载数据
-                        mPresenter.getGankRemoteData("前端", Constant.GANK_KNOWLEDGE_COUNT, page, false);
+                        mPresenter.getGankRemoteData(getString(R.string.knowledge_web), Constant.GANK_KNOWLEDGE_COUNT, page, false);
                     }
                 }
             }
@@ -135,7 +135,7 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
     @Override
     public void onRefresh() {
         swlKnowledgeHome.setRefreshing(true);
-        mPresenter.getGankRemoteData("前端", 10, 1, true);
+        mPresenter.getGankRemoteData(getString(R.string.knowledge_web), 10, 1, true);
     }
 
     @Override

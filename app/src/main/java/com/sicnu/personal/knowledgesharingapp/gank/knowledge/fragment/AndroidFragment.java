@@ -59,7 +59,7 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
         mDataBean = new ArrayList<>();
         mAdapter = new KnowledgeRcAdapter(getActivity(), mDataBean);
         mPresenter = new GankRemotePresenter(this);
-        mPresenter.firstRequstData("Android");
+        mPresenter.firstRequstData(getString(R.string.knowledge_android));
         manager = new GridLayoutManager(getActivity(),1);
         rcHomeMainItem.setLayoutManager(manager);
         mAdapter.setItemClickListener(this);
@@ -71,19 +71,14 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if(newState==RecyclerView.SCROLL_STATE_IDLE){
-                    YLog.d("last :"+lastVisiblePostion);
-                    YLog.d("count :"+mAdapter.getItemCount());
                     if(mAdapter.isFade()==false&&lastVisiblePostion+1==mAdapter.getItemCount()){
                         //加载数据
-                        mPresenter.getGankRemoteData("Android",Constant.GANK_KNOWLEDGE_COUNT,page,false);
+                        mPresenter.getGankRemoteData(getString(R.string.knowledge_android),Constant.GANK_KNOWLEDGE_COUNT,page,false);
                     }
                     if(mAdapter.isFade()==true&&lastVisiblePostion==mAdapter.getItemCount()){
                         //加载数据
-                        mPresenter.getGankRemoteData("Android",Constant.GANK_KNOWLEDGE_COUNT,page,false);
+                        mPresenter.getGankRemoteData(getString(R.string.knowledge_android),Constant.GANK_KNOWLEDGE_COUNT,page,false);
                     }
-                    YLog.d("PPP_lastVisiblePostion: "+lastVisiblePostion);
-                    YLog.d("PPP_getItemCount : "+mAdapter.getItemCount());
-                    YLog.d("PPP_isFade : "+mAdapter.isFade());
                 }
             }
 
@@ -115,7 +110,6 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
     @Override
     public void showLoadMorePage(GankDataBean dataBean) {
         if (!dataBean.isError()) {
-            YLog.d("LoadMore");
             page+=1;
             List<GankDataBean.ResultsBean> data = dataBean.getResults();
             if (data!=null && data.size()>0){
@@ -127,20 +121,20 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
 
     @Override
     public void showErrorPage(Throwable throwable) {
-        YLog.d("Error Page");
+
 
     }
 
     @Override
     public void showDataPage() {
-        YLog.d("showDataPage ");
+
 
     }
 //刷新
     @Override
     public void onRefresh() {
         swlKnowledgeHome.setRefreshing(true);
-        mPresenter.getGankRemoteData("Android",10,1,true);
+        mPresenter.getGankRemoteData(getString(R.string.knowledge_android),10,1,true);
     }
 
     @Override

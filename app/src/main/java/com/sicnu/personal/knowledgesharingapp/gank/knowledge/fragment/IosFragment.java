@@ -58,7 +58,7 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
         mDataBean = new ArrayList<>();
         mAdapter = new KnowledgeRcAdapter(getActivity(), mDataBean);
         mPresenter = new GankRemotePresenter(this);
-        mPresenter.firstRequstData("iOS");
+        mPresenter.firstRequstData(getString(R.string.knowledge_ios));
         manager = new GridLayoutManager(getActivity(),1);
         rcHomeMainItem.setLayoutManager(manager);
         rcHomeMainItem.setAdapter(mAdapter);
@@ -70,15 +70,13 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if(newState==RecyclerView.SCROLL_STATE_IDLE){
-                    YLog.d("last :"+lastVisiblePostion);
-                    YLog.d("count :"+mAdapter.getItemCount());
                     if(mAdapter.isFade()==false&&lastVisiblePostion+1==mAdapter.getItemCount()){
                         //加载数据
-                        mPresenter.getGankRemoteData("iOS",Constant.GANK_KNOWLEDGE_COUNT,page,false);
+                        mPresenter.getGankRemoteData(getString(R.string.knowledge_ios),Constant.GANK_KNOWLEDGE_COUNT,page,false);
                     }
                     if(mAdapter.isFade()==true&&lastVisiblePostion==mAdapter.getItemCount()){
                         //加载数据
-                        mPresenter.getGankRemoteData("iOS",Constant.GANK_KNOWLEDGE_COUNT,page,false);
+                        mPresenter.getGankRemoteData(getString(R.string.knowledge_ios),Constant.GANK_KNOWLEDGE_COUNT,page,false);
                     }
                 }
             }
@@ -135,7 +133,7 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
     @Override
     public void onRefresh() {
         swlKnowledgeHome.setRefreshing(true);
-        mPresenter.getGankRemoteData("iOS",10,1,true);
+        mPresenter.getGankRemoteData(getString(R.string.knowledge_ios),10,1,true);
     }
 
     @Override
