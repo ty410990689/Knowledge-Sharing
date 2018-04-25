@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/ll_root_layout"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:background="@color/colorTrasparentBlack"
+            android:layout_centerInParent="true"
+            android:id="@+id/avi_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AVLoadingIndicatorView.Large"
+            android:visibility="visible"
+            app:indicatorName="BallZigZagDeflectIndicator"
+            app:indicatorColor="@color/colorWhite"
+            />
+        <ImageView
+            android:id="@+id/iv_register_bg"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            app:layout_heightPercent="30%"
+            android:src="@mipmap/bg_login"
+            />
+        <EditText
+            android:layout_below="@+id/iv_register_bg"
+            android:id="@+id/edt_register_username"
+            android:layout_width="match_parent"
+            android:hint="请输入账号"
+            app:layout_heightPercent="10%"
+            style="@style/UserEditTextViewCustomStyle"
+            />
+
+        <EditText
+            android:layout_below="@+id/edt_register_username"
+            android:id="@+id/edt_register_password"
+            android:layout_width="match_parent"
+            android:hint="请输入账号"
+            app:layout_heightPercent="10%"
+            style="@style/UserEditTextViewCustomStyle"
+            />
+        <Button
+            android:layout_below="@+id/edt_register_password"
+            android:id="@+id/btn_register_sure"
+            android:layout_width="match_parent"
+            app:layout_heightPercent="10%"
+            android:text="确定注册"
+            android:background="@null"
+            />
+    </android.support.percent.PercentRelativeLayout>
+</LinearLayout>

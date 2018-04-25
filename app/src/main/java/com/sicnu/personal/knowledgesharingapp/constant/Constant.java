@@ -39,4 +39,10 @@ public class Constant {
             R.mipmap.relaxmedia_bg7, R.mipmap.relaxmedia_bg8, R.mipmap.relaxmedia_bg9, R.mipmap.relaxmedia_bg10, R.mipmap.relaxmedia_bg11,
              R.mipmap.relaxmedia_bg12, R.mipmap.relaxmedia_bg13, R.mipmap.relaxmedia_bg14, R.mipmap.relaxmedia_bg15,
             R.mipmap.relaxmedia_bg16};
+
+    //Login And Register
+    public static final String USERNAME= "userName";
+    public static final String PASSWORD="passWord";
+    public static final int REGISTER_CODE=1;
+    public static final int LOGIN_CODE=2;
 }

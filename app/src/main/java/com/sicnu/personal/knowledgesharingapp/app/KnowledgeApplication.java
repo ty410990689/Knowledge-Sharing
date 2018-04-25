@@ -14,6 +14,9 @@ import com.sicnu.personal.knowledgesharingapp.service.UpdateService;
 import com.sicnu.personal.knowledgesharingapp.utils.FrescoUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
+import cn.bmob.v3.Bmob;
+
+
 /**
  * Created by Administrator on 2018/3/9 0009.
  */
@@ -24,6 +27,7 @@ public class KnowledgeApplication extends Application implements Application.Act
     public void onCreate() {
         super.onCreate();
         mContext = this;
+
         ImagePipelineConfig config = FrescoUtils.getDefaultImagePipelineConfig(this);
         Fresco.initialize(this,config);
         registerActivityLifecycleCallbacks(this);

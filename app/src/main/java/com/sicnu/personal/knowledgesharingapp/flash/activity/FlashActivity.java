@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 
 import com.sicnu.personal.knowledgesharingapp.R;
+import com.sicnu.personal.knowledgesharingapp.bmob.activity.LoginActivity;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity.HomeActivity;
@@ -25,6 +26,7 @@ import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bmob.v3.Bmob;
 
 /**
  * Created by Administrator on 2018/3/5 0005.
@@ -89,8 +91,9 @@ public class FlashActivity extends Activity {
     }
 
     private void startHomeActivity(String action){
-        Intent startHomeIntent = new Intent(FlashActivity.this, HomeActivity.class);
+        Intent startHomeIntent = new Intent(FlashActivity.this, LoginActivity.class);
         startHomeIntent.putExtra("netState",action);
         startActivity(startHomeIntent);
+        finish();
     }
 }

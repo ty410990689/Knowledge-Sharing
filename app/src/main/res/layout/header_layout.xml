@@ -18,11 +18,11 @@
             app:layout_marginLeftPercent="40%"
             />
         <com.facebook.drawee.view.SimpleDraweeView
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:id="@+id/iv_header_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@mipmap/bg_navigation_header"/>
+            android:background="@mipmap/bg_login"/>
 
     </android.support.percent.PercentFrameLayout>
 

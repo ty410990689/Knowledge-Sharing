@@ -38,4 +38,11 @@
         <item name="android:textColor">@color/colorWhite</item>
 
     </style>
+    <style name="UserEditTextViewCustomStyle">
+        <item name="android:textColorHint">@color/colorGray</item>
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:background">@drawable/selctor_login_edt</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+    </style>
 </resources>

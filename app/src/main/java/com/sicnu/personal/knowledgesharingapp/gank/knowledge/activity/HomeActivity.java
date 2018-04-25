@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.percent.PercentFrameLayout;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v4.app.Fragment;
@@ -18,7 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.sicnu.personal.knowledgesharingapp.R;
+import com.sicnu.personal.knowledgesharingapp.bmob.activity.LoginActivity;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.adapter.HomeViewPagerAdapter;
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.AndroidFragment;
@@ -26,6 +30,8 @@ import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.IosFragmen
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.WebFragment;
 import com.sicnu.personal.knowledgesharingapp.gank.relaxmedia.activity.RelaxMediaActivity;
 import com.sicnu.personal.knowledgesharingapp.pretty.activity.PrettyPictureActivity;
+import com.sicnu.personal.knowledgesharingapp.utils.FrescoUtils;
+import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
 
 import java.util.ArrayList;
@@ -69,6 +75,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        inits();
+
+    }
+
+    private void inits() {
         ArrayList<Fragment> fragments = initFragments();
         mAdapter = new HomeViewPagerAdapter(this.getSupportFragmentManager(), this, fragments);
         viewpagerHome.setAdapter(mAdapter);
@@ -76,7 +87,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         viewpagerHome.setOffscreenPageLimit(3);
         navigationViewHome.setItemIconTintList(null);
         navigationViewHome.setNavigationItemSelectedListener(this);
-
+        View view = navigationViewHome.getHeaderView(0);
+        String imageUrl = (String) SharedPreferencesUtils.getParam(this,SharedPreferencesUtils.USER_PHOTO_PATH,"null");
+        if(!imageUrl.equals("null")){
+            SimpleDraweeView imageView = view.findViewById(R.id.iv_header_bg);
+            DraweeController controller = FrescoUtils.getDefaultImageRequest(imageUrl);
+            imageView.setController(controller);
+        }
 
     }
 
@@ -103,10 +120,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
     }
-    private String IMAGE_URL="http://sw.bos.baidu.com/sw-search-sp/software/1379d0e8e102a/android-studio-ide-171.4443003-windows.exe";
-    private String IMAGE_NAME=".jpg";
-    private int count = 1;
-    private long id = 0;
     private ArrayList<Fragment> initFragments() {
         ArrayList<Fragment> lists = new ArrayList<>();
         lists.add(new IosFragment());
@@ -133,7 +146,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         }
     };
-
+private long exitTime = 0;
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -143,6 +156,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_relax_media:
                 startActivity(new Intent(this, RelaxMediaActivity.class));
+                break;
+            case R.id.nav_loginout:
+                if(System.currentTimeMillis()-exitTime>2000) {
+                    Snackbar.make(drawerMainLayout, "再次点击退出登录", Snackbar.LENGTH_SHORT).show();
+                    exitTime = System.currentTimeMillis();
+                }else{
+                    SharedPreferencesUtils.setParam(this,Constant.USERNAME,"null");
+                    SharedPreferencesUtils.getParam(this,Constant.PASSWORD,"null");
+                    startActivity(new Intent(this, LoginActivity.class));
+                    finish();
+                }
                 break;
 
         }

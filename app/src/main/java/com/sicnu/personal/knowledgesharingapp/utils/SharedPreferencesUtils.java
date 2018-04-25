@@ -16,6 +16,7 @@ public class SharedPreferencesUtils {
     public static final String DOWNLOAD_PATH = "download_path";
     public static final String FILE_NAME="knowledge_sp_file";
     public static final String FLASH_VERSION="flash_version";
+    public static final String USER_PHOTO_PATH="photoPath";
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
      * @param context
