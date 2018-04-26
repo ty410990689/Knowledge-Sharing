@@ -23,6 +23,7 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.bmob.activity.LoginActivity;
+import com.sicnu.personal.knowledgesharingapp.collection.activity.CollectActivity;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.adapter.HomeViewPagerAdapter;
 import com.sicnu.personal.knowledgesharingapp.gank.knowledge.fragment.AndroidFragment;
@@ -33,6 +34,7 @@ import com.sicnu.personal.knowledgesharingapp.pretty.activity.PrettyPictureActiv
 import com.sicnu.personal.knowledgesharingapp.utils.FrescoUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
+import com.sicnu.personal.knowledgesharingapp.view.ActionSheetDialog;
 
 import java.util.ArrayList;
 
@@ -167,6 +169,10 @@ private long exitTime = 0;
                     startActivity(new Intent(this, LoginActivity.class));
                     finish();
                 }
+                break;
+
+            case R.id.nav_favorite:
+                startActivity(new Intent(this, CollectActivity.class));
                 break;
 
         }
