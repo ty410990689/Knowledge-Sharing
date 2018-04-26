@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.bmob.activity.LoginActivity;
 import com.sicnu.personal.knowledgesharingapp.collection.activity.CollectActivity;
 import com.sicnu.personal.knowledgesharingapp.collection.model.databean.CollectDataBean;
@@ -204,20 +205,21 @@ public class CommonUtils {
 
     public static void showFunctionDialog(final Activity activity, final CollectHanldPresenter presenter, final CollectDataBean dataBean){
         new ActionSheetDialog(activity).builder()
-                .setTitle("功能菜单")
+                .setTitle(activity.getString(R.string.function_menu_title))
                 .setCancelable(true)
                 .setCanceledOnTouchOutside(false)
-                .addSheetItem("收藏", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
+                .addSheetItem(activity.getString(R.string.collect_text), ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
                     @Override
                     public void onClick(int which) {
                         presenter.addCollectToBmob(dataBean);
                     }
                 })
-                .addSheetItem("打开收藏页面", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
+                .addSheetItem(activity.getString(R.string.open_collect_page), ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
                     @Override
                     public void onClick(int which) {
                         activity.startActivity(new Intent(activity, CollectActivity.class));
                     }
                 }).show();
     }
+
 }

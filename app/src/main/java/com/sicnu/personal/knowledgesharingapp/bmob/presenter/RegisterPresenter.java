@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.provider.MediaStore;
 import android.widget.Toast;
 
+import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.bmob.callback.BmobCallBack;
 import com.sicnu.personal.knowledgesharingapp.bmob.userbean.UserLogin;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
@@ -65,7 +66,6 @@ public class RegisterPresenter {
                     @Override
                     public void onFailure(int i, String s) {
                         YLog.d("Bmob : onFailure : "+s);
-                        YLog.d("Bmob : onFailure : "+i);
                         callback.RequestFailed(i,s);
                     }
                 });
@@ -80,7 +80,7 @@ public class RegisterPresenter {
     }
     public void loginUserByPassWord(final String userName, final String passWord, final BmobCallBack callBack){
         if(userName==null || passWord==null){
-            callBack.RequestFailed(1,"data is null");
+            callBack.RequestFailed(1,context.getString(R.string.query_data_is_null));
             return;
         }
         UserLogin userLogin = new UserLogin();
@@ -118,24 +118,6 @@ public class RegisterPresenter {
             }
         });
 
-
-        /*query.getObject(context, userId, new GetCallback() {
-            @Override
-            public void onSuccess(JSONObject jsonObject) {
-                try {
-                    YLog.d("Bmob login error : "+jsonObject.toString());
-                    callBack.RequestPhotoSuccessful(jsonObject.getString("photoPath"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-                YLog.d("Bmob pgoto data : "+s);
-                callBack.RequestFailed(i,s);
-            }
-        });*/
     }
 
 

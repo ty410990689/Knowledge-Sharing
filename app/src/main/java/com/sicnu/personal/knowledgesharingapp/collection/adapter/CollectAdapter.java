@@ -56,7 +56,6 @@ public class CollectAdapter extends BaseAdapter {
             mView = view;
             viewHolder = (CollectViewHolder) mView.getTag();
         }
-        YLog.d("BmobCollect : "+datas.get(i).getArticleType());
         viewHolder.tvCollectDesc.setText(datas.get(i).getArticleDesc());
         viewHolder.tvCollectType.setText(datas.get(i).getArticleType());
         viewHolder.tvCollectWho.setText(datas.get(i).getArticleAuthor());

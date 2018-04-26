@@ -69,7 +69,7 @@ public class RelaxMediaActivity extends Activity implements GankContact.GankView
         setContentView(R.layout.activity_relax_media);
         ButterKnife.bind(this);
         gankRemotePresenter = new GankRemotePresenter(this);
-        gankRemotePresenter.firstRequstData("休息视频");
+        gankRemotePresenter.firstRequstData(getString(R.string.relax_media));
         initToolBar();
         manager = new GridLayoutManager(this, 1);
         mData = new ArrayList<>();
@@ -148,15 +148,15 @@ public class RelaxMediaActivity extends Activity implements GankContact.GankView
     @Override
     public void onKnowledgeLongClickListener(View view, int pos) {
         CollectDataBean dataBean = new CollectDataBean();
-        dataBean.setArticleType("Media");
+        dataBean.setArticleType(getString(R.string.relax_media_type));
         dataBean.setArticleDesc(mData.get(pos).getDesc());
         dataBean.setArticleLink(mData.get(pos).getUrl());
         dataBean.setUserName(BmobUser.getCurrentUser(this).getUsername());
-        dataBean.setArticleMold("RelaxMedia");
+        dataBean.setArticleMold(getString(R.string.relax_media_mold));
         if (mData.get(pos).getWho() != null) {
             dataBean.setArticleAuthor(mData.get(pos).getWho().toString());
         } else {
-            dataBean.setArticleAuthor("UnKnown");
+            dataBean.setArticleAuthor(getString(R.string.author_unknown));
         }
         CommonUtils.showFunctionDialog(this, presenter, dataBean);
     }
@@ -167,21 +167,21 @@ public class RelaxMediaActivity extends Activity implements GankContact.GankView
 
     @Override
     public void showCollectDataIsExitedPage() {
-        Snackbar.make(rcRelaxMedia,"已经存在",Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(dlRootview, getString(R.string.collect_data_is_exited), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void showCollectSuccessfulPage() {
-        Snackbar.make(rcRelaxMedia,"收藏成功",Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(dlRootview, getString(R.string.collect_successful), Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void showCollectErrorPage(int code, String reason) {
-        Snackbar.make(rcRelaxMedia,"收藏失败",Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(dlRootview, getString(R.string.collect_failed) + reason, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
-    public void showQueryErrorPage(int code, String readson) {
-        Snackbar.make(rcRelaxMedia,"异常错误",Snackbar.LENGTH_SHORT).show();
+    public void showQueryErrorPage(int code, String reason) {
+        Snackbar.make(dlRootview, getString(R.string.collect_error) + reason, Snackbar.LENGTH_SHORT).show();
     }
 }

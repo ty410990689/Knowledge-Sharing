@@ -119,9 +119,9 @@ public class RegisterActivity extends Activity implements BmobCallBack {
             presenter.registerUser(account, passWord, imagePath, this);
         } else {
             if (imagePath != null) {
-                Snackbar.make(llRootLayout, getString(R.string.userNameOrPasswordTip), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(llRootLayout, getString(R.string.username_or_password_tip), Snackbar.LENGTH_SHORT).show();
             } else {
-                Snackbar.make(llRootLayout, getString(R.string.clickImageToSelectPhoto), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(llRootLayout, getString(R.string.clickimage_to_selectphoto), Snackbar.LENGTH_SHORT).show();
             }
         }
     }
@@ -141,7 +141,7 @@ public class RegisterActivity extends Activity implements BmobCallBack {
     public void RequestFailed(int code, String reason) {
         aviLoading.hide();
         setViewsClickale(true);
-        Snackbar.make(llRootLayout, "注册失败:" + reason, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(llRootLayout, getString(R.string.register_failed) + reason, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

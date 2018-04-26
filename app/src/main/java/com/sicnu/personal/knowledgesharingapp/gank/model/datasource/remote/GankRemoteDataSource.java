@@ -26,19 +26,19 @@ public class GankRemoteDataSource implements GankDataSource {
                 .subscribe(new Observer<GankDataBean>() {
                     @Override
                     public void onCompleted() {
-                        YLog.d("Gank Datas is onCompleted : ");
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        YLog.d("Gank Datas is error : "+e.getMessage());
+
                         dataCallBack.onLoadedfailed(e);
                     }
 
                     @Override
                     public void onNext(GankDataBean gankDataBean) {
                         dataCallBack.onLoadedSuccessful(gankDataBean);
-                        YLog.d("Gank Datas is OK : "+ gankDataBean.getResults().size());
+
                     }
                 });
     }

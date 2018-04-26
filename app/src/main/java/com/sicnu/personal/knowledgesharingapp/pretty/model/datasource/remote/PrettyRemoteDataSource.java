@@ -18,7 +18,6 @@ import rx.schedulers.Schedulers;
 public class PrettyRemoteDataSource implements PrettyDataSource {
     @Override
     public void getRemotePrettyData(int page, final PrettyDataCallBack callBack) {
-        YLog.d("Pretty_remoteQuest");
         String requestPage = page+".cfg";
         RetrofitClient.getInstance().createReq(ServerApi.class)
                 .getPrettyPictureData(requestPage)
@@ -32,13 +31,13 @@ public class PrettyRemoteDataSource implements PrettyDataSource {
 
                     @Override
                     public void onError(Throwable e) {
-                        YLog.d("Pretty_error : "+e.getMessage());
+
                         callBack.onLoadedFailed(e);
                     }
 
                     @Override
                     public void onNext(PrettyDataBean prettyDataBean) {
-                        YLog.d("Pretty_success : "+prettyDataBean.getResults().size());
+
                         callBack.onLoadedSuccessful(prettyDataBean);
                     }
                 });

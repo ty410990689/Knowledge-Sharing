@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
 
+import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 import com.sicnu.personal.knowledgesharingapp.utils.CommonUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;
@@ -54,11 +55,9 @@ public class MDownLoadManager {
                 file.mkdir();
             }
             if(new File(CommonUtils.getDownLoadLocalPath(mContext,fileName)).exists()){
-                Toast.makeText(mContext, "该文件已存在", Toast.LENGTH_SHORT).show();
-                YLog.d("fileName exis: return ");
+                Toast.makeText(mContext, mContext.getString(R.string.file_is_exited), Toast.LENGTH_SHORT).show();
                 return  -2;
             }
-            YLog.d("fileName : "+savePath+fileName);
             request.setDestinationInExternalPublicDir(savePath, fileName);
             request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
             long id = downLoadManager.enqueue(request);

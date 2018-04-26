@@ -11,6 +11,7 @@ import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.sicnu.personal.knowledgesharingapp.R;
 
 /**
  * Created by Administrator on 2018/3/10 0010.
@@ -32,8 +33,7 @@ public class FrescoUtils {
     }
     public static ImagePipelineConfig getDefaultImagePipelineConfig(Context context){
         DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder(context)
-                .setBaseDirectoryName("KnowLedgeIamgeCache")
-
+                .setBaseDirectoryName(context.getString(R.string.facebook_image_cache))
                 .build();
         ImagePipelineConfig config = ImagePipelineConfig.newBuilder(context)
                 .setDownsampleEnabled(true)

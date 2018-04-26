@@ -35,7 +35,6 @@ public class WebActivity extends Activity {
         setContentView(R.layout.activity_web);
         ButterKnife.bind(this);
         String intentUrl = getIntent().getStringExtra(Constant.INTENT_WEB_URL);
-        YLog.d("WebView : "+intentUrl);
         intentType = getIntent().getIntExtra(Constant.INTENT_WEB_TYPE,Constant.INTENT_WEB_KNOWLEDGE_TYPE);
         initWebView();
         if(intentUrl!=null && !intentUrl.equals("")){
@@ -77,12 +76,10 @@ public class WebActivity extends Activity {
                if(url==null){return false;}
                 try {
                     if (url.startsWith("http:") || url.startsWith("https:")) {
-                        YLog.d("WebView url 111: ");
                         oldUrl = url;
                         view.loadUrl(url);
                         return true;
                     } else {
-                        YLog.d("WebView url 222: ");
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(oldUrl));
                         startActivity(intent);
                         ComponentName componentName = new ComponentName("com.sicnu.personal.knowledgesharingapp","com.sicnu.personal.knowledgesharingapp.gank.knowledge.activity.WebActivity");

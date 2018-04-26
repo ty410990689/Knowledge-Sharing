@@ -16,7 +16,7 @@ public interface CollectContact {
         void showCollectDataIsExitedPage();
         void showCollectSuccessfulPage();
         void showCollectErrorPage(int code,String reason);
-        void showQueryErrorPage(int code,String readson);
+        void showQueryErrorPage(int code,String reason);
     }
 
     public interface CollectPresenter extends BasePresenter{

@@ -45,7 +45,6 @@ public class FlashActivity extends Activity {
         ButterKnife.bind(this);
         String flashMode = (String) SharedPreferencesUtils.getParam(this, SharedPreferencesUtils.FLASH_MODE, "local");
         String fileName = (String) SharedPreferencesUtils.getParam(this,SharedPreferencesUtils.FLASH_IMAGE_NAME,"null");
-        YLog.d("flash_log mode : "+flashMode+"  fileName : "+fileName);
         File flashImage = new File(CommonUtils.getDownLoadLocalPath(this,fileName));
         if (flashMode.equals("remote")&& !fileName.equals("null")&& flashImage.exists()) {
             //显示后台推送的图片
@@ -69,7 +68,6 @@ public class FlashActivity extends Activity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 if( NetConnectUtils.getInstance(FlashActivity.this).isWifiConnected()) {
-                    YLog.d("Can Use");
                     startLoginActivity(Constant.WIFI_IS_CONNECT);
                 }else if(!NetConnectUtils.getInstance(FlashActivity.this).isNetWorkConnected()){
                     //无网络连接
@@ -92,7 +90,6 @@ public class FlashActivity extends Activity {
 
     private void startLoginActivity(String action){
         Intent startHomeIntent = new Intent(FlashActivity.this, LoginActivity.class);
-        startHomeIntent.putExtra("netState",action);
         startActivity(startHomeIntent);
         finish();
     }

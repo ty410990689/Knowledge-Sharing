@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.flash.databean.FlashPicDataBean;
 import com.sicnu.personal.knowledgesharingapp.net.MDownLoadManager;
 import com.sicnu.personal.knowledgesharingapp.net.RetrofitClient;
@@ -50,8 +51,7 @@ public class UpdateService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
     public void getFlashInfo() {
-        YLog.d("flash_log : getFlashInfo");
-        RetrofitClient.getInstance().createReq(ServerApi.class).getFlashPicInfo("flashInfo.cfg")
+        RetrofitClient.getInstance().createReq(ServerApi.class).getFlashPicInfo(getString(R.string.flash_info_file))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<FlashPicDataBean>() {
@@ -62,7 +62,7 @@ public class UpdateService extends Service {
 
                     @Override
                     public void onError(Throwable e) {
-                        YLog.d("flash_log :err :"+e.getMessage());
+
                     }
 
                     @Override
@@ -72,7 +72,7 @@ public class UpdateService extends Service {
                             String fileName = flashPicDataBean.getResults().getImageName();
                             String imageVersion = flashPicDataBean.getResults().getImageVersion();
                             String oldVersion = (String) SharedPreferencesUtils.getParam(UpdateService.this,SharedPreferencesUtils.FLASH_VERSION,"v0.0.0");
-                            YLog.d("flash_log :onNext "+CommonUtils.getDownLoadLocalPath(UpdateService.this,fileName));
+
 
                             if(imageUrl!=null && imageUrl.length()>0 && imageVersion.compareTo(oldVersion)>0) {
                                 File flashFile = new File(CommonUtils.getDownLoadLocalPath(UpdateService.this,fileName));
@@ -112,10 +112,10 @@ public class UpdateService extends Service {
     }
     private void checkImageMd5(String md5,String fileName,String showMode,String flashVersion) {
         String savePath = CommonUtils.getDownLoadLocalPath(this,fileName);
-        YLog.d("flash_log : savePath : "+savePath);
+
         String calculateMd5 = CommonUtils.getFileMD5(savePath);
         if(calculateMd5!=null) {
-            YLog.d("flash_log : calculateMd5 : "+calculateMd5);
+
             if (calculateMd5.equals(md5)) {
                 SharedPreferencesUtils.setParam(this, SharedPreferencesUtils.FLASH_MODE, showMode);
                 SharedPreferencesUtils.setParam(this, SharedPreferencesUtils.FLASH_IMAGE_NAME, fileName);

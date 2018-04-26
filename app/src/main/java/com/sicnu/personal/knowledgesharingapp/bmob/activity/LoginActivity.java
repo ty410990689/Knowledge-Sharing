@@ -51,10 +51,9 @@ public class LoginActivity extends AppCompatActivity implements BmobCallBack {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        Bmob.initialize(this, "395da80df8c7610fd2c094e9def84a2c");
+        Bmob.initialize(this,getString(R.string.bmob_key));
         aviLoading.hide();
         setViewsClickale(true);
-        YLog.d("Bmob Oncreate");
         persenter = new RegisterPresenter(this);
         AutoLoginUser();
     }
@@ -76,15 +75,9 @@ public class LoginActivity extends AppCompatActivity implements BmobCallBack {
         startActivityForResult(new Intent(this, RegisterActivity.class), Constant.REGISTER_CODE);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        YLog.d("Bmob OnResume");
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        YLog.d("Bmob onActivityResult");
         if (requestCode == Constant.REGISTER_CODE && resultCode == RESULT_OK) {
             YLog.d("Bmob onActivityResult");
             String userName = data.getStringExtra(Constant.USERNAME);
@@ -101,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements BmobCallBack {
             aviLoading.smoothToShow();
             persenter.loginUserByPassWord(account, passWord, this);
         } else {
-            Snackbar.make(llRootLayout, "账号或者密码错误", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(llRootLayout, getString(R.string.username_or_passowrd_error), Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -127,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements BmobCallBack {
         aviLoading.hide();
         setViewsClickale(true);
         YLog.d("Bmob login error : " + reason);
-        Snackbar.make(llRootLayout, "登录出错 :" + reason, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(llRootLayout, getString(R.string.login_error)+ reason, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

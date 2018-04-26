@@ -102,7 +102,6 @@ public class PhotoViewerActivity extends AppCompatActivity {
 
         tvPhotoSizeDesc.setText(formatSizeString(currentPosition, data.size()));
         if (data != null) {
-            YLog.d("intent_data : position : " + position + "   size : " + data.size());
             adapter = new PhotoPagerAdapter(data, this);
             vpPhotoviewer.setAdapter(adapter);
             vpPhotoviewer.setCurrentItem(position);
@@ -147,10 +146,10 @@ public class PhotoViewerActivity extends AppCompatActivity {
 //                Palette.Swatch vir = palette.getLightMutedSwatch();
                     Palette.Swatch vir = palette.getDarkVibrantSwatch();
                     if (vir == null) {
-                        YLog.d("color return");
+
                         return;
                     }
-                    YLog.d("color : " + vir.getRgb());
+
                     flToolbar.setBackgroundColor(vir.getRgb());
                     if (Build.VERSION.SDK_INT >= 21) {
                         Window window = getWindow();
@@ -171,7 +170,7 @@ public class PhotoViewerActivity extends AppCompatActivity {
                 break;
             case R.id.iv_toolbar_save:
                 currentUrl = data.get(vpPhotoviewer.getCurrentItem()).getImageUrl();
-                Toast.makeText(this, "请稍后...", Toast.LENGTH_SHORT).show();
+               Snackbar.make(rootLayout,getString(R.string.wait_for_moment),Snackbar.LENGTH_SHORT).show();
                 checkPermissionDownLoad();
                 break;
         }
@@ -187,7 +186,7 @@ public class PhotoViewerActivity extends AppCompatActivity {
                         id = MDownLoadManager.getInstance(PhotoViewerActivity.this).addDownLoadTask(currentUrl, CommonUtils.cutUrlGetImageName(currentUrl));
                     } else if (permission.shouldShowRequestPermissionRationale) {
                         // 用户拒绝了权限申请
-                        Snackbar.make(rootLayout, "你拒绝了访问", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(rootLayout,getString(R.string.you_refuse_sdcard_permisiion), Snackbar.LENGTH_SHORT).show();
                     } else {
                         // 用户拒绝，并且选择不再提示
                         // 可以引导用户进入权限设置界面开启权限
@@ -219,7 +218,7 @@ public class PhotoViewerActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction() == DownloadManager.ACTION_DOWNLOAD_COMPLETE) {
-                    Snackbar.make(rootLayout, "下载成功", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(rootLayout,getString(R.string.download_success), Snackbar.LENGTH_LONG).show();
                 }
             }
         };

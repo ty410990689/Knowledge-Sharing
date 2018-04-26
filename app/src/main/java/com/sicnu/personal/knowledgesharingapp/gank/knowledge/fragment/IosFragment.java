@@ -137,13 +137,11 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
 
     @Override
     public void showErrorPage(Throwable throwable) {
-        YLog.d("Error Page");
         showViewStubPage(Constant.SHOW_ERROR_PAGE);
     }
 
     @Override
     public void showDataPage() {
-        YLog.d("showDataPage ");
         if(viewStub.getVisibility()==View.VISIBLE){
             viewStub.setVisibility(View.GONE);
         }
@@ -170,11 +168,11 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
         dataBean.setUserName(BmobUser.getCurrentUser(getActivity()).getUsername());
         dataBean.setArticleDesc(mDataBean.get(pos).getDesc());
         dataBean.setArticleLink(mDataBean.get(pos).getUrl());
-        dataBean.setArticleMold("Knowledge_Api");
+        dataBean.setArticleMold(getString(R.string.knownledge_api_mold));
         if (mDataBean.get(pos).getWho() != null) {
             dataBean.setArticleAuthor(mDataBean.get(pos).getWho().toString());
         } else {
-            dataBean.setArticleAuthor("Unknown");
+            dataBean.setArticleAuthor(getString(R.string.author_unknown));
         }
         dataBean.setArticleTitle(mDataBean.get(pos).getDesc());
         dataBean.setArticleType(getString(R.string.knowledge_ios));
@@ -188,22 +186,22 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
 
 
     public void showCollectDataIsExitedPage() {
-        Snackbar.make(flRootview, "已经存在", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(flRootview, getString(R.string.collect_data_is_exited), Snackbar.LENGTH_SHORT).show();
     }
 
 
     public void showCollectSuccessfulPage() {
-        Snackbar.make(flRootview, "收藏成功", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(flRootview, getString(R.string.collect_successful), Snackbar.LENGTH_SHORT).show();
     }
 
 
     public void showCollectErrorPage(int code, String reason) {
-        Snackbar.make(flRootview, "收藏失败:" + reason, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(flRootview, getString(R.string.collect_failed) + reason, Snackbar.LENGTH_SHORT).show();
     }
 
 
-    public void showQueryErrorPage(int code, String readson) {
-
+    public void showQueryErrorPage(int code, String reason) {
+        Snackbar.make(flRootview, getString(R.string.collect_error) + reason, Snackbar.LENGTH_SHORT).show();
     }
     public void showViewStubPage(int type){
         View ivStubView = viewStub.inflate();
@@ -211,11 +209,11 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
         ivErrorIcon = ivStubView.findViewById(R.id.iv_error_icon);
 
         if(type== Constant.QUERY_ERROR){
-            tvErrorContent.setText(getResources().getString(R.string.queryCollectDataIsNull));
+            tvErrorContent.setText(getResources().getString(R.string.query_collect_datas_is_null));
             ivErrorIcon.setImageResource(R.mipmap.icon_error_blue);
         }else if(type==Constant.SHOW_ERROR_PAGE)
         {
-            tvErrorContent.setText(getResources().getString(R.string.showPageError));
+            tvErrorContent.setText(getResources().getString(R.string.error_page_tip));
             ivErrorIcon.setImageResource(R.mipmap.icon_red_error);
         }
         viewStub.setVisibility(View.VISIBLE);

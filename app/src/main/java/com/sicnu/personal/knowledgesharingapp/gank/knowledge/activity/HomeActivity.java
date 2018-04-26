@@ -106,16 +106,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         switch (view.getId()) {
             case R.id.tv_title_android:
                 viewpagerHome.setCurrentItem(Constant.ANDROID_FRAGMENT, true);
-                Toast.makeText(this, "Android", Toast.LENGTH_SHORT).show();
+
                 break;
 
             case R.id.tv_title_ios:
-                Toast.makeText(this, "IOS", Toast.LENGTH_SHORT).show();
+
                 viewpagerHome.setCurrentItem(Constant.IOS_FRAGMENT, true);
                 break;
 
             case R.id.tv_title_web:
-                Toast.makeText(this, "Web", Toast.LENGTH_SHORT).show();
                 viewpagerHome.setCurrentItem(Constant.WEB_FRAGMENT, true);
                 break;
 
@@ -165,7 +164,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_loginout:
                 if (System.currentTimeMillis() - exitTime > 2000) {
-                    Snackbar.make(drawerMainLayout, "再次点击退出登录", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(drawerMainLayout, getString(R.string.snack_exit_tip), Snackbar.LENGTH_SHORT).show();
                     exitTime = System.currentTimeMillis();
                 } else {
                     SharedPreferencesUtils.setParam(this, Constant.USERNAME, "null");

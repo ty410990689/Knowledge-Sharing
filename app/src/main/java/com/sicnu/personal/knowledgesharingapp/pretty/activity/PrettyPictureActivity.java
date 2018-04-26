@@ -79,14 +79,10 @@ public class PrettyPictureActivity extends AppCompatActivity implements PrettyPi
 
                     if (adapter.isFade() == false && lastVisiblePostion + 1 == adapter.getItemCount()) {
                         //加载数据
-                        YLog.d("PPP_lastVisiblePostion_FALSE: " + lastVisiblePostion);
-                        YLog.d("PPPAGE : " + page);
                         prettyPicturePresenter.getPrettyRemoteData(page, false);
                     }
                     if (adapter.isFade() == true && lastVisiblePostion == adapter.getItemCount()) {
                         //加载数据
-                        YLog.d("PPP_lastVisiblePostion_TRUE: " + lastVisiblePostion);
-                        YLog.d("PPP_getItemCount : " + adapter.getItemCount());
                         prettyPicturePresenter.getPrettyRemoteData(page, false);
                     }
                 }
@@ -117,14 +113,13 @@ public class PrettyPictureActivity extends AppCompatActivity implements PrettyPi
 
     @Override
     public void showLoadMorePage(PrettyDataBean dataBean) {
-        YLog.d("PPP_showLoadMorePage");
         page += 1;
         adapter.onLoadMoreData(dataBean.getResults());
     }
 
     @Override
     public void showErrorPage(Throwable throwable) {
-        if (throwable.getMessage().equals("HTTP 404 Not Found")) {
+        if (throwable.getMessage().equals(getString(R.string.net_not_found))) {
             adapter.setIfHaveMoreData(false);
         }
     }

@@ -19,7 +19,6 @@ import java.util.List;
  */
 
 public class PhotoPagerAdapter extends PagerAdapter {
-    public static final String TAG = "PhotoPagerAdapter";
     private List<PrettyDataBean.ResultsBean> data;
     private AppCompatActivity mContext;
 
@@ -35,7 +34,6 @@ public class PhotoPagerAdapter extends PagerAdapter {
     }
     public Object instantiateItem(ViewGroup container, int position) {
         String url= data.get(position).getImageUrl();
-        YLog.d("vp_position : "+position);
         SimpleDraweeView photoView = new SimpleDraweeView(mContext);
         DraweeController controller = FrescoUtils.getDefaultImageRequest(url);
         photoView.setController(controller);

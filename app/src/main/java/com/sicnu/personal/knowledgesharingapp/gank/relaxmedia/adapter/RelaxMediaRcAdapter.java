@@ -107,7 +107,7 @@ public class RelaxMediaRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 if (mDatabean.get(position).getWho() != null) {
                     normalViewHolder.tvKnowledgeWho.setText(mDatabean.get(position).getWho().toString());
                 } else {
-                    normalViewHolder.tvKnowledgeWho.setText("UnKnown");
+                    normalViewHolder.tvKnowledgeWho.setText(mContext.getString(R.string.author_unknown));
                 }
             }
         } else if (holder instanceof CommonRcFootVH) {
@@ -126,17 +126,17 @@ public class RelaxMediaRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Random rand = new Random();
         holder.ivHomeRcItemBg.setImageURI(Uri.parse("res:///"+Constant.RELAX_MEDIA_BG[position%16]));
         if(position%2==0) {
-            YLog.d("Radom : I0");
+
             holder.tvKnowledgeDesc.setTextColor(mContext.getResources().getColor(R.color.colorBlack));
             holder.tvKnowledgeTime.setTextColor(mContext.getResources().getColor(R.color.colorBlack));
             holder.tvKnowledgeWho.setTextColor(mContext.getResources().getColor(R.color.colorBlack));
         }else if(position%2==1){
-            YLog.d("Radom : I1");
+
             holder.tvKnowledgeDesc.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
             holder.tvKnowledgeTime.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
             holder.tvKnowledgeWho.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
         }else{
-            YLog.d("Radom : I3");
+
         }
     }
 

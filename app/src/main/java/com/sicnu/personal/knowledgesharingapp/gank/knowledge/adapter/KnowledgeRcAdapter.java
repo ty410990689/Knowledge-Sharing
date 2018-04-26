@@ -42,7 +42,6 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void loadMoreData(List<GankDataBean.ResultsBean> moreData) {
         if (this.mDatabean != null) {
-            YLog.d("Adapter LoadMore");
             haveMore = true;
             this.mDatabean.addAll(moreData);
             notifyDataSetChanged();
@@ -109,7 +108,7 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 if(mDatabean.get(position).getWho()!=null){
                     normalViewHolder.tvKnowledgeWho.setText(mDatabean.get(position).getWho().toString());
                 }else{
-                    normalViewHolder.tvKnowledgeWho.setText("UnKnown");
+                    normalViewHolder.tvKnowledgeWho.setText(mContext.getString(R.string.author_unknown));
                 }
             }
         }else if(holder instanceof CommonRcFootVH){

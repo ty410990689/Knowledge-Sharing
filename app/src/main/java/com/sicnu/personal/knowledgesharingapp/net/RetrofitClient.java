@@ -32,7 +32,6 @@ public class RetrofitClient {
         if(client==null){
             synchronized (RetrofitClient.class){
                 if(client==null && retrofit==null){
-                    YLog.d("asdasdsada");
                     client = new RetrofitClient();
                 }
             }

@@ -75,7 +75,7 @@ public class CollectActivity extends AppCompatActivity implements CollectContact
                 openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
                         0xCE)));
                 openItem.setWidth(dp2px(90));
-                openItem.setTitle("Open");
+                openItem.setTitle(getString(R.string.item_open));
                 openItem.setTitleSize(18);
                 openItem.setTitleColor(Color.WHITE);
                 menu.addMenuItem(openItem);
@@ -85,7 +85,7 @@ public class CollectActivity extends AppCompatActivity implements CollectContact
                 deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
                         0x3F, 0x25)));
                 deleteItem.setWidth(dp2px(90));
-                deleteItem.setTitle("Dele");
+                deleteItem.setTitle(getString(R.string.item_delete));
                 deleteItem.setTitleSize(18);
                 deleteItem.setTitleColor(Color.WHITE);
                 menu.addMenuItem(deleteItem);
@@ -135,11 +135,11 @@ public class CollectActivity extends AppCompatActivity implements CollectContact
         ivErrorIcon = ivStubView.findViewById(R.id.iv_error_icon);
 
         if(type== Constant.QUERY_ERROR){
-            tvErrorContent.setText(getResources().getString(R.string.queryCollectDataIsNull));
+            tvErrorContent.setText(getString(R.string.query_collect_datas_is_null));
             ivErrorIcon.setImageResource(R.mipmap.icon_error_blue);
         }else if(type==Constant.SHOW_ERROR_PAGE)
         {
-            tvErrorContent.setText(getResources().getString(R.string.showPageError));
+            tvErrorContent.setText(getString(R.string.error_page_tip));
             ivErrorIcon.setImageResource(R.mipmap.icon_red_error);
         }
         viewStub.setVisibility(View.VISIBLE);
