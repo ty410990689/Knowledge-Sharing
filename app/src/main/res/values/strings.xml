@@ -11,4 +11,6 @@
     <string name="refuse_sdcard_permission">您拒绝了本次访问</string>
     <string name="userNameOrPasswordTip">账号和密码长度需介于4-12之间</string>
     <string name="clickImageToSelectPhoto">请点击图片选择背景头像</string>
+    <string name="queryCollectDataIsNull">您暂无收藏数据..</string>
+    <string name="showPageError">您的数据走丢了...</string>
 </resources>

@@ -11,7 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.collection.contact.CollectContact;
@@ -53,7 +56,10 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
     @BindView(R.id.swl_knowledge_home)
     SwipeRefreshLayout swlKnowledgeHome;
     private CollectHanldPresenter collectPresenter;
-
+    @BindView(R.id.view_stub)
+    ViewStub viewStub;
+    TextView tvErrorContent;
+    ImageView ivErrorIcon;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,13 +134,15 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
     @Override
     public void showErrorPage(Throwable throwable) {
         YLog.d("Error Page");
-
+        showViewStubPage(Constant.SHOW_ERROR_PAGE);
     }
 
     @Override
     public void showDataPage() {
         YLog.d("showDataPage ");
-
+        if(viewStub.getVisibility()==View.VISIBLE){
+            viewStub.setVisibility(View.GONE);
+        }
     }
 
     //刷新
@@ -192,6 +200,21 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
 
     public void showQueryErrorPage(int code, String readson) {
 
+    }
+    public void showViewStubPage(int type){
+        View ivStubView = viewStub.inflate();
+        tvErrorContent = ivStubView.findViewById(R.id.tv_warning_content);
+        ivErrorIcon = ivStubView.findViewById(R.id.iv_error_icon);
+
+        if(type== Constant.QUERY_ERROR){
+            tvErrorContent.setText(getResources().getString(R.string.queryCollectDataIsNull));
+            ivErrorIcon.setImageResource(R.mipmap.icon_error_blue);
+        }else if(type==Constant.SHOW_ERROR_PAGE)
+        {
+            tvErrorContent.setText(getResources().getString(R.string.showPageError));
+            ivErrorIcon.setImageResource(R.mipmap.icon_red_error);
+        }
+        viewStub.setVisibility(View.VISIBLE);
     }
 }
 

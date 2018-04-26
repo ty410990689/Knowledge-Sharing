@@ -20,7 +20,7 @@ import com.sicnu.personal.knowledgesharingapp.collection.adapter.CollectAdapter;
 import com.sicnu.personal.knowledgesharingapp.collection.contact.CollectContact;
 import com.sicnu.personal.knowledgesharingapp.collection.model.databean.CollectDataBean;
 import com.sicnu.personal.knowledgesharingapp.collection.presenter.CollectHanldPresenter;
-import com.sicnu.personal.knowledgesharingapp.utils.YLog;
+import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,10 @@ public class CollectActivity extends AppCompatActivity implements CollectContact
     CollectHanldPresenter presenter;
     CollectAdapter adapter;
     List<CollectDataBean> dataBeen;
-
+    @BindView(R.id.view_stub)
+    ViewStub viewStub;
+    TextView tvErrorContent;
+    ImageView ivErrorIcon;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,13 +120,28 @@ public class CollectActivity extends AppCompatActivity implements CollectContact
 
     @Override
     public void showCollectErrorPage(int code, String reason) {
-
+        showViewStubPage(Constant.SHOW_ERROR_PAGE);
     }
 
     @Override
     public void showQueryErrorPage(int code, String reason) {
-
-
+        showViewStubPage(Constant.QUERY_ERROR);
     }
 
+
+    public void showViewStubPage(int type){
+        View ivStubView = viewStub.inflate();
+        tvErrorContent = ivStubView.findViewById(R.id.tv_warning_content);
+        ivErrorIcon = ivStubView.findViewById(R.id.iv_error_icon);
+
+        if(type== Constant.QUERY_ERROR){
+            tvErrorContent.setText(getResources().getString(R.string.queryCollectDataIsNull));
+            ivErrorIcon.setImageResource(R.mipmap.icon_error_blue);
+        }else if(type==Constant.SHOW_ERROR_PAGE)
+        {
+            tvErrorContent.setText(getResources().getString(R.string.showPageError));
+            ivErrorIcon.setImageResource(R.mipmap.icon_red_error);
+        }
+        viewStub.setVisibility(View.VISIBLE);
+    }
 }

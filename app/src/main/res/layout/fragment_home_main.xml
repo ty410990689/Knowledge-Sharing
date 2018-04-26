@@ -13,5 +13,10 @@
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
-
+    <ViewStub
+        android:inflatedId="@+id/iv_stub_content"
+        android:id="@+id/view_stub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/layout_error_page"/>
 </FrameLayout>

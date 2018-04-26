@@ -45,4 +45,7 @@ public class Constant {
     public static final String PASSWORD="passWord";
     public static final int REGISTER_CODE=1;
     public static final int LOGIN_CODE=2;
+
+    public static final int QUERY_ERROR=1;
+    public static final int SHOW_ERROR_PAGE =2;
 }

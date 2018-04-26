@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,6 @@ import com.sicnu.personal.knowledgesharingapp.pretty.activity.PrettyPictureActiv
 import com.sicnu.personal.knowledgesharingapp.utils.FrescoUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.SharedPreferencesUtils;
 import com.sicnu.personal.knowledgesharingapp.utils.YLog;
-import com.sicnu.personal.knowledgesharingapp.view.ActionSheetDialog;
 
 import java.util.ArrayList;
 
@@ -46,7 +46,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2018/3/6 0006.
  */
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.tv_title_web)
     TextView tvTitleWeb;
@@ -72,6 +72,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.iv_title_menu)
     ImageView ivTitleMenu;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +91,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationViewHome.setItemIconTintList(null);
         navigationViewHome.setNavigationItemSelectedListener(this);
         View view = navigationViewHome.getHeaderView(0);
-        String imageUrl = (String) SharedPreferencesUtils.getParam(this,SharedPreferencesUtils.USER_PHOTO_PATH,"null");
-        if(!imageUrl.equals("null")){
+        String imageUrl = (String) SharedPreferencesUtils.getParam(this, SharedPreferencesUtils.USER_PHOTO_PATH, "null");
+        if (!imageUrl.equals("null")) {
             SimpleDraweeView imageView = view.findViewById(R.id.iv_header_bg);
             DraweeController controller = FrescoUtils.getDefaultImageRequest(imageUrl);
             imageView.setController(controller);
@@ -99,7 +100,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    @OnClick({R.id.tv_title_android, R.id.tv_title_ios, R.id.tv_title_web,R.id.iv_title_menu})
+    @OnClick({R.id.tv_title_android, R.id.tv_title_ios, R.id.tv_title_web, R.id.iv_title_menu})
     public void setOnClickListener(View view) {
         switch (view.getId()) {
             case R.id.tv_title_android:
@@ -118,10 +119,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.iv_title_menu:
-              drawerMainLayout.openDrawer(Gravity.LEFT);
+                drawerMainLayout.openDrawer(Gravity.LEFT);
                 break;
         }
     }
+
     private ArrayList<Fragment> initFragments() {
         ArrayList<Fragment> lists = new ArrayList<>();
         lists.add(new IosFragment());
@@ -148,10 +150,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         }
     };
-private long exitTime = 0;
+    private long exitTime = 0;
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_photo:
                 startActivity(new Intent(this, PrettyPictureActivity.class));
                 break;
@@ -160,12 +163,12 @@ private long exitTime = 0;
                 startActivity(new Intent(this, RelaxMediaActivity.class));
                 break;
             case R.id.nav_loginout:
-                if(System.currentTimeMillis()-exitTime>2000) {
+                if (System.currentTimeMillis() - exitTime > 2000) {
                     Snackbar.make(drawerMainLayout, "再次点击退出登录", Snackbar.LENGTH_SHORT).show();
                     exitTime = System.currentTimeMillis();
-                }else{
-                    SharedPreferencesUtils.setParam(this,Constant.USERNAME,"null");
-                    SharedPreferencesUtils.getParam(this,Constant.PASSWORD,"null");
+                } else {
+                    SharedPreferencesUtils.setParam(this, Constant.USERNAME, "null");
+                    SharedPreferencesUtils.getParam(this, Constant.PASSWORD, "null");
                     startActivity(new Intent(this, LoginActivity.class));
                     finish();
                 }

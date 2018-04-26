@@ -11,5 +11,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 </com.baoyz.swipemenulistview.SwipeMenuListView>
-
+    <ViewStub
+        android:inflatedId="@+id/iv_stub_content"
+        android:id="@+id/view_stub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/layout_error_page"/>
 </RelativeLayout>
