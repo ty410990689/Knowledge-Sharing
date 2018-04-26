@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements BmobCallBack {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         Bmob.initialize(this, "395da80df8c7610fd2c094e9def84a2c");
-        aviLoading.show();
+        aviLoading.hide();
         setViewsClickale(true);
         YLog.d("Bmob Oncreate");
         persenter = new RegisterPresenter(this);
@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity implements BmobCallBack {
         String userName = (String) SharedPreferencesUtils.getParam(this, Constant.USERNAME, "null");
         String passWord = (String) SharedPreferencesUtils.getParam(this, Constant.PASSWORD, "null");
         if (!userName.equals("null") && !passWord.equals("null")){
+            YLog.d("Bmob AutoLoginUser");
             aviLoading.smoothToShow();
             setViewsClickale(false);
             persenter.loginUserByPassWord(userName, passWord, this);
