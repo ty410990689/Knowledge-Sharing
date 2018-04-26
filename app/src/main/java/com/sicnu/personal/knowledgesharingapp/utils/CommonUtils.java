@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.sicnu.personal.knowledgesharingapp.bmob.activity.LoginActivity;
 import com.sicnu.personal.knowledgesharingapp.constant.Constant;
 import com.tbruyelle.rxpermissions.Permission;
 import com.tbruyelle.rxpermissions.RxPermissions;
@@ -95,7 +96,7 @@ public class CommonUtils {
 
     }
 
-    public static void showDialog(final Context context) {
+    public static void showPermissionDialog(final Context context) {
         //TODO 首先检查是否有权限， 有权限直接读写， 没有权限 拉起权限
         //有权限  跳过拉起设置权限步骤
         //没有权限 走以下步骤
@@ -118,6 +119,55 @@ public class CommonUtils {
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO Auto-generated method stub
 
+                    }
+                });
+
+        AlertDialog dialog = builder.show();
+        dialog.setCanceledOnTouchOutside(false);
+    }
+    public static void showNetDialog(final Activity context, final String type){
+        //TODO 首先检查网络状态， 4G提示， 未连接网络直接退出
+        //有权限  跳过拉起设置权限步骤
+        //没有权限 走以下步骤
+        String tipContent = "";
+        String positiveText = "";
+        String negativeText ="";
+        final int open_mode ;
+        if(type.equals(Constant.NET_IS_DISCONNECT)){
+            open_mode=1;
+            tipContent = "您当前处于无网状态，请先连接网络";
+            positiveText = "去开启";
+            negativeText = "退出";
+        }else if(type.equals(Constant.NET_IS_CONNECT)){
+            open_mode=2;
+            tipContent = "多识App多图预警，您目前正处于使用流量状态。建议你三思而后行";
+            positiveText = "我是土豪";
+            negativeText = "退出";
+        }else{
+            open_mode = 0;
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setTitle("温馨提示");
+        builder.setMessage(tipContent);
+        builder.setPositiveButton(positiveText, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if(open_mode==1){
+                    simpleSetting(context);
+                }else if(open_mode==2){
+                    context.startActivity(new Intent(context, LoginActivity.class));
+                }
+            }
+        }).
+                setNegativeButton(negativeText, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        context.finish();
                     }
                 });
 

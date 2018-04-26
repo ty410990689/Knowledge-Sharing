@@ -191,7 +191,7 @@ public class PhotoViewerActivity extends AppCompatActivity {
                     } else {
                         // 用户拒绝，并且选择不再提示
                         // 可以引导用户进入权限设置界面开启权限
-                        CommonUtils.showDialog(PhotoViewerActivity.this);
+                        CommonUtils.showPermissionDialog(PhotoViewerActivity.this);
                     }
                 }
             });

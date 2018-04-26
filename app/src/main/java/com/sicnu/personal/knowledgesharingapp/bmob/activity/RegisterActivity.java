@@ -82,7 +82,7 @@ public class RegisterActivity extends Activity implements BmobCallBack {
                 } else if (permission.shouldShowRequestPermissionRationale) {
                     Snackbar.make(llRootLayout, getString(R.string.refuse_sdcard_permission), Snackbar.LENGTH_SHORT).show();
                 } else {
-                    CommonUtils.showDialog(RegisterActivity.this);
+                    CommonUtils.showPermissionDialog(RegisterActivity.this);
                 }
             }
         });

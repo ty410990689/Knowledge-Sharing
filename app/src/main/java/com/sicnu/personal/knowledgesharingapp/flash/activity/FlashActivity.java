@@ -70,15 +70,15 @@ public class FlashActivity extends Activity {
             public void onAnimationEnd(Animation animation) {
                 if( NetConnectUtils.getInstance(FlashActivity.this).isWifiConnected()) {
                     YLog.d("Can Use");
-                    startHomeActivity(Constant.WIFI_IS_CONNECT);
+                    startLoginActivity(Constant.WIFI_IS_CONNECT);
                 }else if(!NetConnectUtils.getInstance(FlashActivity.this).isNetWorkConnected()){
                     //无网络连接
                     YLog.d("NO NET");
-                    startHomeActivity(Constant.NET_IS_DISCONNECT);
+                   CommonUtils.showNetDialog(FlashActivity.this,Constant.NET_IS_DISCONNECT);
                 }else{
                     //有网切不是WIFI
                     YLog.d("HAVE NET isnot WIFI");
-                    startHomeActivity(Constant.NET_IS_CONNECT);
+                    CommonUtils.showNetDialog(FlashActivity.this,Constant.NET_IS_CONNECT);
                 }
             }
 
@@ -90,7 +90,7 @@ public class FlashActivity extends Activity {
         ivFlashMain.startAnimation(scaleAnimation);
     }
 
-    private void startHomeActivity(String action){
+    private void startLoginActivity(String action){
         Intent startHomeIntent = new Intent(FlashActivity.this, LoginActivity.class);
         startHomeIntent.putExtra("netState",action);
         startActivity(startHomeIntent);
