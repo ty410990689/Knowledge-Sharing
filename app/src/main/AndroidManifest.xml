@@ -42,6 +42,7 @@
             android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"></activity>
         <activity android:name=".bmob.activity.LoginActivity"></activity>
         <service android:name=".service.UpdateService"></service>
+        <activity android:name=".collection.activity.CollectActivity"></activity>
     </application>
 
 </manifest>

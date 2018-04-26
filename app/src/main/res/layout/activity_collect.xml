@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/custom_collect_toolbar"
+        layout="@layout/layout_custom_toolbar"></include>
+<com.baoyz.swipemenulistview.SwipeMenuListView
+    android:layout_below="@+id/custom_collect_toolbar"
+    android:id="@+id/lv_collect_swipe_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+</com.baoyz.swipemenulistview.SwipeMenuListView>
+
+</RelativeLayout>

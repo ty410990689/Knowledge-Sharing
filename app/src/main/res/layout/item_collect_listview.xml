@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+<android.support.percent.PercentRelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:id="@+id/ll_desc_layout"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <TextView
+        android:id="@+id/tv_collect_type"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:gravity="center|left"
+        android:paddingLeft="25dp"
+        android:textSize="20sp"
+        android:text="Android"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/tv_collect_who"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="right|center"
+        android:paddingRight="20dp"
+        android:textSize="15sp"
+        android:text="你说你"
+        />
+</LinearLayout>
+    <TextView
+        android:gravity="left|top"
+        android:textSize="15sp"
+        android:paddingLeft="25dp"
+        android:text="Readline utils, for moving the cursor, clearing lines, creating a readline interface, and more."
+        android:layout_below="@+id/ll_desc_layout"
+        android:id="@+id/tv_collect_desc"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        />
+
+</android.support.percent.PercentRelativeLayout>
+</LinearLayout>

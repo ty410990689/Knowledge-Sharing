@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ImageView
+    app:layout_marginLeftPercent="20%"
+    android:id="@+id/iv_error_icon"
+    android:layout_centerVertical="true"
+    app:layout_widthPercent="10%"
+    app:layout_heightPercent="10%"
+    android:src="@mipmap/icon_error_blue"/>
+    <TextView
+        android:paddingLeft="10dp"
+        android:textSize="18sp"
+        android:id="@+id/tv_warning_content"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@+id/iv_error_icon"
+        android:layout_centerVertical="true"
+        app:layout_widthPercent="70%"
+        app:layout_heightPercent="10%" />
+</android.support.percent.PercentRelativeLayout>

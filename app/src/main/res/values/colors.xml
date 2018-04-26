@@ -11,4 +11,5 @@
     <color name="colorTransparentDarkBlack">#4ddedcdc</color>
     <color name="colorTransparentWhite">#e9fffcfc</color>
     <color name="colorTransparentShallowBlack">#a0dedcdc</color>
+    <color name="colorLightGray">#d2d2d2</color>
 </resources>
