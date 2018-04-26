@@ -17,6 +17,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.sicnu.personal.knowledgesharingapp.bmob.activity.LoginActivity;
+import com.sicnu.personal.knowledgesharingapp.collection.activity.CollectActivity;
 import com.sicnu.personal.knowledgesharingapp.collection.model.databean.CollectDataBean;
 import com.sicnu.personal.knowledgesharingapp.collection.model.datasource.CollectResponse;
 import com.sicnu.personal.knowledgesharingapp.collection.presenter.CollectHanldPresenter;
@@ -201,7 +202,7 @@ public class CommonUtils {
         }
     }
 
-    public static void showFunctionDialog(Activity activity, final CollectHanldPresenter presenter, final CollectDataBean dataBean){
+    public static void showFunctionDialog(final Activity activity, final CollectHanldPresenter presenter, final CollectDataBean dataBean){
         new ActionSheetDialog(activity).builder()
                 .setTitle("功能菜单")
                 .setCancelable(true)
@@ -215,6 +216,7 @@ public class CommonUtils {
                 .addSheetItem("打开收藏页面", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
                     @Override
                     public void onClick(int which) {
+                        activity.startActivity(new Intent(activity, CollectActivity.class));
                     }
                 }).show();
     }
