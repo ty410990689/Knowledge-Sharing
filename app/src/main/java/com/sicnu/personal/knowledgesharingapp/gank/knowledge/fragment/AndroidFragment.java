@@ -97,7 +97,7 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
     @Override
     public void showRefreshPage(GankDataBean dataBean) {
         if(!dataBean.isError()){
-            page=1;
+            page=2;
             swlKnowledgeHome.setRefreshing(false);
             List<GankDataBean.ResultsBean> data = dataBean.getResults();
             mAdapter.refreshData(data);
@@ -109,9 +109,6 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
         if (!dataBean.isError()) {
             page+=1;
             List<GankDataBean.ResultsBean> data = dataBean.getResults();
-            if (data!=null && data.size()>0){
-                mDataBean.addAll(data);
-            }
             mAdapter.loadMoreData(data);
         }
     }

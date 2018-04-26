@@ -99,7 +99,7 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
     @Override
     public void showRefreshPage(GankDataBean dataBean) {
         if(!dataBean.isError()){
-            page=1;
+            page=2;
             swlKnowledgeHome.setRefreshing(false);
             List<GankDataBean.ResultsBean> data = dataBean.getResults();
             mAdapter.refreshData(data);
@@ -111,9 +111,6 @@ public class IosFragment extends Fragment implements GankContact.GankView, Swipe
         if (!dataBean.isError()) {
             page+=1;
             List<GankDataBean.ResultsBean> data = dataBean.getResults();
-            if (data!=null && data.size()>0){
-                mDataBean.addAll(data);
-            }
             mAdapter.loadMoreData(data);
         }
     }
