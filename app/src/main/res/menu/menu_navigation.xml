@@ -13,10 +13,6 @@
             android:icon="@mipmap/icon_pretty"
             android:title="美图专栏"/>
         <item
-            android:id="@+id/nav_dynamic"
-            android:icon="@mipmap/icon_mine_normal"
-            android:title="我的动态"/>
-        <item
             android:id="@+id/nav_system"
             android:icon="@mipmap/icon_system_normal"
             android:title="多识设置"/>
