@@ -28,7 +28,12 @@ public class CollectAdapter extends BaseAdapter {
         this.context = context;
         this.datas = dataBeanList;
     }
-
+    public void deleteItem(int pos){
+        if(datas.get(pos)!=null){
+            datas.remove(pos);
+            notifyDataSetChanged();
+        }
+    }
     @Override
     public int getCount() {
         return datas == null ? 0 : datas.size();

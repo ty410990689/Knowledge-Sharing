@@ -37,7 +37,7 @@ import cn.bmob.v3.BmobUser;
  * Created by Administrator on 2018/4/12 0012.
  */
 
-public class RelaxMediaActivity extends Activity implements GankContact.GankView, SwipeRefreshLayout.OnRefreshListener, RelaxMediaRcAdapter.KnowledgeClickListenter, CollectContact.CollectView {
+public class RelaxMediaActivity extends Activity implements GankContact.GankView, SwipeRefreshLayout.OnRefreshListener, RelaxMediaRcAdapter.KnowledgeClickListenter, CollectContact.CollectDataView {
 
     @BindView(R.id.iv_toolbar_back)
     public ImageView ivToolbarBack;
@@ -77,7 +77,7 @@ public class RelaxMediaActivity extends Activity implements GankContact.GankView
         rcRelaxMedia.setLayoutManager(manager);
         rcRelaxMedia.setAdapter(mediaRcAdapter);
         swlRelaxmedia.setOnRefreshListener(this);
-        presenter = new CollectHanldPresenter(this, this);
+        presenter = new CollectHanldPresenter(this);
         rcRelaxMedia.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -158,12 +158,9 @@ public class RelaxMediaActivity extends Activity implements GankContact.GankView
         } else {
             dataBean.setArticleAuthor(getString(R.string.author_unknown));
         }
-        CommonUtils.showFunctionDialog(this, presenter, dataBean);
+        CommonUtils.showFunctionDialog(this, presenter,this, dataBean);
     }
 
-    @Override
-    public void showQueryCollectDatasPage(List<CollectDataBean> dataBeen) {
-    }
 
     @Override
     public void showCollectDataIsExitedPage() {

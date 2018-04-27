@@ -17,54 +17,77 @@ public class CollectHanldPresenter implements CollectContact.CollectPresenter {
     private CollectDataBean data;
     private Context context;
     private CollectResponse response;
-    private CollectContact.CollectView baseView;
-    public CollectHanldPresenter(Context context,CollectContact.CollectView view){
+    private CollectContact.CollectDataView collectDataView;
+    private CollectContact.DeleteDataView deleteDataView;
+    private CollectContact.QueryDataView queryDataView;
+    public CollectHanldPresenter(Context context){
         this.context =context;
-        this.baseView = view;
         response = new CollectResponse(context);
     }
 
 
     @Override
-    public void quertUserCollectDatasFromBmob(String userName) {
+    public void quertUserCollectDatasFromBmob(String userName, final CollectContact.QueryDataView queryDataView) {
+        if(this.queryDataView==null) {
+            this.queryDataView = queryDataView;
+        }
         response.queryCollectDataFromBmob(userName, new CollectBmobCallBack.QueryCollectCallBack() {
             @Override
             public void queryCollectionSuccessful(List<CollectDataBean> dataBeen) {
-                baseView.showQueryCollectDatasPage(dataBeen);
+                queryDataView.showQueryCollectDatasPage(dataBeen);
             }
 
             @Override
             public void queryCollectFailed(int code, String reason) {
-                baseView.showQueryErrorPage(code,reason);
+                queryDataView.showQueryErrorPage(code,reason);
             }
 
         });
     }
 
     @Override
-    public void addCollectToBmob(CollectDataBean dataBean) {
+    public void addCollectToBmob(CollectDataBean dataBean, final CollectContact.CollectDataView dataView) {
+        if(this.collectDataView==null){
+            this.collectDataView = dataView;
+        }
         response.addCollectDataToBmob(dataBean, new CollectBmobCallBack.CollectCallBack() {
             @Override
             public void theCollectDataIsExited() {
-                baseView.showCollectDataIsExitedPage();
+                dataView.showCollectDataIsExitedPage();
             }
 
             @Override
             public void collectSuccessful() {
-                baseView.showCollectSuccessfulPage();
+                dataView.showCollectSuccessfulPage();
             }
 
             @Override
             public void collectFailed(int code, String reaon) {
-                baseView.showCollectErrorPage(code,reaon);
+                dataView.showCollectErrorPage(code,reaon);
             }
 
             @Override
             public void queryCollectFailed(int code, String reason) {
-                baseView.showQueryErrorPage(code,reason);
+                dataView.showQueryErrorPage(code,reason);
             }
         });
     }
 
+    public void deleteCollectDataForBmob(CollectDataBean dataBean, final CollectContact.DeleteDataView dataView){
+        if(this.deleteDataView==null){
+            this.deleteDataView =dataView;
+        }
+        response.deleteCollectDataForBmob(dataBean, new CollectBmobCallBack.DeleteCollectCallBack() {
+            @Override
+            public void deleteCollectSuccessfil() {
+                dataView.showDeleteCollectSuccessfulPage();
+            }
+
+            @Override
+            public void deleteCollectFailed(int code, String reason) {
+                dataView.showDeleteCollectFailedPage(code,reason);
+            }
+        });
+    }
 
 }

@@ -40,7 +40,7 @@ import cn.bmob.v3.BmobUser;
  * Created by Administrator on 2018/3/6 0006.
  */
 
-public class AndroidFragment extends Fragment implements GankContact.GankView, SwipeRefreshLayout.OnRefreshListener, KnowledgeRcAdapter.KnowledgeClickListenter, CollectContact.CollectView {
+public class AndroidFragment extends Fragment implements  SwipeRefreshLayout.OnRefreshListener, KnowledgeRcAdapter.KnowledgeClickListenter, CollectContact.CollectDataView, GankContact.GankView {
     @BindView(R.id.rc_home_main_item)
     RecyclerView rcHomeMainItem;
     Unbinder unbinder;
@@ -81,7 +81,7 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
         rcHomeMainItem.setAdapter(mAdapter);
         swlKnowledgeHome.setRefreshing(false);
         swlKnowledgeHome.setOnRefreshListener(this);
-        collectPresenter = new CollectHanldPresenter(getActivity(), this);
+        collectPresenter = new CollectHanldPresenter(getActivity());
         rcHomeMainItem.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -175,14 +175,8 @@ public class AndroidFragment extends Fragment implements GankContact.GankView, S
         }
         dataBean.setArticleTitle(mDataBean.get(pos).getDesc());
         dataBean.setArticleType(getString(R.string.knowledge_android));
-        CommonUtils.showFunctionDialog(getActivity(), collectPresenter, dataBean);
+        CommonUtils.showFunctionDialog(getActivity(), collectPresenter, this,dataBean);
     }
-
-    @Override
-    public void showQueryCollectDatasPage(List<CollectDataBean> dataBeen) {
-
-    }
-
     @Override
     public void showCollectDataIsExitedPage() {
         Snackbar.make(flRootview, getString(R.string.collect_data_is_exited), Snackbar.LENGTH_SHORT).show();

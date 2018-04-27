@@ -11,16 +11,34 @@ import java.util.List;
  */
 
 public interface CollectContact {
-    public interface CollectView extends BaseView{
-        void showQueryCollectDatasPage(List<CollectDataBean> dataBeen);
+    interface CollectDataView extends BaseView {
+
         void showCollectDataIsExitedPage();
-        void showCollectSuccessfulPage();
-        void showCollectErrorPage(int code,String reason);
         void showQueryErrorPage(int code,String reason);
+        void showCollectSuccessfulPage();
+
+        void showCollectErrorPage(int code, String reason);
+
+
     }
 
-    public interface CollectPresenter extends BasePresenter{
-        void quertUserCollectDatasFromBmob(String userName);
-        void addCollectToBmob(CollectDataBean dataBean);
+    interface DeleteDataView extends BaseView {
+        void showDeleteCollectFailedPage(int code, String reason);
+
+        void showDeleteCollectSuccessfulPage();
+    }
+
+    interface QueryDataView extends BaseView {
+        void showQueryCollectDatasPage(List<CollectDataBean> dataBeen);
+
+        void showQueryErrorPage(int code, String reason);
+    }
+
+    interface CollectPresenter extends BasePresenter {
+        void quertUserCollectDatasFromBmob(String userName, QueryDataView queryDataView);
+
+        void addCollectToBmob(CollectDataBean dataBean, CollectDataView collectDataView);
+
+        void deleteCollectDataForBmob(CollectDataBean dataBean, DeleteDataView deleteDataView);
     }
 }

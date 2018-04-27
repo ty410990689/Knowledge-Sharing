@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.sicnu.personal.knowledgesharingapp.R;
 import com.sicnu.personal.knowledgesharingapp.bmob.activity.LoginActivity;
 import com.sicnu.personal.knowledgesharingapp.collection.activity.CollectActivity;
+import com.sicnu.personal.knowledgesharingapp.collection.contact.CollectContact;
 import com.sicnu.personal.knowledgesharingapp.collection.model.databean.CollectDataBean;
 import com.sicnu.personal.knowledgesharingapp.collection.model.datasource.CollectResponse;
 import com.sicnu.personal.knowledgesharingapp.collection.presenter.CollectHanldPresenter;
@@ -116,7 +117,7 @@ public class CommonUtils {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                simpleSetting(context);
+                simpleSetting(context,"SdCardPermisiion");
 
             }
         }).
@@ -161,9 +162,8 @@ public class CommonUtils {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 if(open_mode==1){
-                    simpleSetting(context);
+                    simpleSetting(context,"NetPermisiion");
                 }else if(open_mode==2){
                     context.startActivity(new Intent(context, LoginActivity.class));
                 }
@@ -181,19 +181,23 @@ public class CommonUtils {
         AlertDialog dialog = builder.show();
         dialog.setCanceledOnTouchOutside(false);
     }
-    private static void simpleSetting(Context context) {
+    private static void simpleSetting(Context context,String type) {
         Intent intent = new Intent();
         try{
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // 将用户引导到系统设置页面
-            if (Build.VERSION.SDK_INT >= 9) {
-                Log.e("HLQ_Struggle", "APPLICATION_DETAILS_SETTINGS");
-                intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-                intent.setData(Uri.fromParts("package", context.getPackageName(), null));
-            } else if (Build.VERSION.SDK_INT <= 8) {
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.setClassName("com.android.settings", "com.android.settings.InstalledAppDetails");
-                intent.putExtra("com.android.settings.ApplicationPkgName", context.getPackageName());
+            if(type.equals("SdCardPermisiion")) {
+                // 将用户引导到系统设置页面
+                if (Build.VERSION.SDK_INT >= 9) {
+                    Log.e("HLQ_Struggle", "APPLICATION_DETAILS_SETTINGS");
+                    intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+                    intent.setData(Uri.fromParts("package", context.getPackageName(), null));
+                } else if (Build.VERSION.SDK_INT <= 8) {
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.setClassName("com.android.settings", "com.android.settings.InstalledAppDetails");
+                    intent.putExtra("com.android.settings.ApplicationPkgName", context.getPackageName());
+                }
+            }else if(type.equals("NetPermisiion")){
+                intent.setAction(Settings.ACTION_DATA_ROAMING_SETTINGS);
             }
             context.startActivity(intent);
         } catch (Exception e) {//抛出异常就直接打开设置页面
@@ -203,7 +207,7 @@ public class CommonUtils {
         }
     }
 
-    public static void showFunctionDialog(final Activity activity, final CollectHanldPresenter presenter, final CollectDataBean dataBean){
+    public static void showFunctionDialog(final Activity activity, final CollectHanldPresenter presenter, final CollectContact.CollectDataView dataView, final CollectDataBean dataBean){
         new ActionSheetDialog(activity).builder()
                 .setTitle(activity.getString(R.string.function_menu_title))
                 .setCancelable(true)
@@ -211,7 +215,7 @@ public class CommonUtils {
                 .addSheetItem(activity.getString(R.string.collect_text), ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
                     @Override
                     public void onClick(int which) {
-                        presenter.addCollectToBmob(dataBean);
+                        presenter.addCollectToBmob(dataBean,dataView);
                     }
                 })
                 .addSheetItem(activity.getString(R.string.open_collect_page), ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {

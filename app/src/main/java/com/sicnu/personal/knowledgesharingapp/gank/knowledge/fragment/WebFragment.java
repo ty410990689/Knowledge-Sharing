@@ -41,7 +41,7 @@ import cn.bmob.v3.BmobUser;
  * Created by Administrator on 2018/3/6 0006.
  */
 
-public class WebFragment extends Fragment implements GankContact.GankView, SwipeRefreshLayout.OnRefreshListener, KnowledgeRcAdapter.KnowledgeClickListenter, CollectContact.CollectView {
+public class WebFragment extends Fragment implements GankContact.GankView, SwipeRefreshLayout.OnRefreshListener, KnowledgeRcAdapter.KnowledgeClickListenter, CollectContact.CollectDataView {
     @BindView(R.id.rc_home_main_item)
     RecyclerView rcHomeMainItem;
     Unbinder unbinder;
@@ -79,7 +79,7 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
         mAdapter.setItemClickListener(this);
         rcHomeMainItem.setAdapter(mAdapter);
         swlKnowledgeHome.setRefreshing(false);
-        collectPresenter = new CollectHanldPresenter(getActivity(), this);
+        collectPresenter = new CollectHanldPresenter(getActivity());
         swlKnowledgeHome.setOnRefreshListener(this);
         rcHomeMainItem.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -174,13 +174,9 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
         }
         dataBean.setArticleTitle(mDataBean.get(pos).getDesc());
         dataBean.setArticleType(getString(R.string.knowledge_web));
-        CommonUtils.showFunctionDialog(getActivity(), collectPresenter, dataBean);
+        CommonUtils.showFunctionDialog(getActivity(), collectPresenter,this, dataBean);
     }
 
-
-    public void showQueryCollectDatasPage(List<CollectDataBean> dataBeen) {
-
-    }
 
 
     public void showCollectDataIsExitedPage() {
@@ -201,6 +197,8 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
     public void showQueryErrorPage(int code, String reason) {
         Snackbar.make(flRootview, getString(R.string.collect_error) + reason, Snackbar.LENGTH_SHORT).show();
     }
+
+
     public void showViewStubPage(int type){
         View ivStubView = viewStub.inflate();
         tvErrorContent = ivStubView.findViewById(R.id.tv_warning_content);

@@ -39,4 +39,6 @@
     <string name="collect_text">收藏</string>
     <string name="open_collect_page">打开收藏页面</string>
     <string name="facebook_image_cache">KnowLedgeIamgeCache</string>
+    <string name="delete_successful">删除成功</string>
+    <string name="delete_failed">删除失败 : </string>
 </resources>

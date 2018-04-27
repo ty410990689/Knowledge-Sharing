@@ -89,33 +89,16 @@ public class CollectResponse {
             }
         });
     }
-    public void deleteCollectDataForBmob(String userName, String articleDesc, final CollectBmobCallBack.DeleteCollectCallBack collectCallBack){
-        BmobQuery<CollectDataBean>query = new BmobQuery<>();
-        query.addWhereEqualTo("userName",userName);
-        query.addWhereEqualTo("artileDesc",articleDesc);
-        query.findObjects(mContext, new FindListener<CollectDataBean>() {
+    public void deleteCollectDataForBmob(CollectDataBean dataBean, final CollectBmobCallBack.DeleteCollectCallBack collectCallBack){
+        dataBean.delete(mContext, new DeleteListener() {
             @Override
-            public void onSuccess(List<CollectDataBean> list) {
-                if(list!=null) {
-                    list.get(0).delete(mContext, new DeleteListener() {
-                        @Override
-                        public void onSuccess() {
-                            collectCallBack.deleteCollectSuccessfil();
-                        }
-
-                        @Override
-                        public void onFailure(int i, String s) {
-                            collectCallBack.deleteCollectFailed(i,s);
-                        }
-                    });
-                }else{
-                    collectCallBack.deleteCollectFailed(1001,"Delete Error");
-                }
+            public void onSuccess() {
+                collectCallBack.deleteCollectSuccessfil();
             }
 
             @Override
-            public void onError(int i, String s) {
-                collectCallBack.deleteCollectFailed(1002,"No QueryDatas");
+            public void onFailure(int i, String s) {
+                collectCallBack.deleteCollectFailed(i,s);
             }
         });
     }
