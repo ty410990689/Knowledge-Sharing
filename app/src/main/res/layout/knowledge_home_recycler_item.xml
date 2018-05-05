@@ -23,10 +23,11 @@
             android:id="@+id/view_home_rc_item_cover"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/knowledge_recycler_bg_night_theme"
+            android:background="#56000000"
             app:layout_heightPercent="50%"></View>
 
         <TextView
+            android:textColor="@color/colorWhite"
             app:layout_marginBottomPercent="3%"
             android:layout_alignParentBottom="true"
             android:id="@+id/tv_knowledge_who"
@@ -35,6 +36,7 @@
             android:gravity="left|bottom"
             />
         <TextView
+            android:textColor="@color/colorWhite"
             app:layout_marginBottomPercent="3%"
             android:id="@+id/tv_knowledge_time"
             app:layout_widthPercent="60%"
@@ -45,6 +47,7 @@
             />
 
         <TextView
+            android:textColor="@color/colorWhite"
             android:id="@+id/tv_knowledge_desc"
             android:layout_width="match_parent"
             android:gravity="left"

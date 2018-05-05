@@ -5,8 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_main_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.sicnu.personal.knowledgesharingapp.MainActivity">
+    android:layout_height="match_parent">
 <android.support.percent.PercentRelativeLayout
     android:id="@+id/reltv_main"
     android:layout_width="match_parent"

@@ -31,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.bmob.v3.BmobUser;
 
 /**
@@ -103,6 +104,10 @@ public class RelaxMediaActivity extends Activity implements GankContact.GankView
         mediaRcAdapter.setItemClickListener(this);
     }
 
+    @OnClick(R.id.iv_toolbar_back)
+    public void onClickListener(){
+        this.finish();
+    }
     private void initToolBar() {
         tvToolbarTitle.setText(getString(R.string.relax_media));
         ivToolbarSave.setVisibility(View.GONE);
@@ -163,7 +168,7 @@ public class RelaxMediaActivity extends Activity implements GankContact.GankView
 
 
     @Override
-    public void showCollectDataIsExitedPage() {
+    public void showCollectDataIsExistedPage() {
         Snackbar.make(dlRootview, getString(R.string.collect_data_is_exited), Snackbar.LENGTH_SHORT).show();
     }
 

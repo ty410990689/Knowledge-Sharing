@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CollectBmobCallBack {
    interface CollectCallBack{
-       void theCollectDataIsExited();
+       void theCollectDataIsExisted();
        void collectSuccessful();
        void collectFailed(int code,String reaon);
        void queryCollectFailed(int code,String reason);
@@ -20,7 +20,7 @@ public interface CollectBmobCallBack {
         void queryCollectFailed(int code,String reason);
     }
     interface DeleteCollectCallBack{
-        void deleteCollectSuccessfil();
+        void deleteCollectSuccessful();
         void deleteCollectFailed(int code,String reason);
     }
 }

@@ -135,7 +135,6 @@ public class AndroidFragment extends Fragment implements  SwipeRefreshLayout.OnR
     @Override
     public void showErrorPage(Throwable throwable) {
         showViewStubPage(Constant.SHOW_ERROR_PAGE);
-
     }
 
     @Override
@@ -178,7 +177,7 @@ public class AndroidFragment extends Fragment implements  SwipeRefreshLayout.OnR
         CommonUtils.showFunctionDialog(getActivity(), collectPresenter, this,dataBean);
     }
     @Override
-    public void showCollectDataIsExitedPage() {
+    public void showCollectDataIsExistedPage() {
         Snackbar.make(flRootview, getString(R.string.collect_data_is_exited), Snackbar.LENGTH_SHORT).show();
     }
 

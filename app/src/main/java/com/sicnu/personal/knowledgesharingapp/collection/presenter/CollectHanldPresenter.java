@@ -52,8 +52,8 @@ public class CollectHanldPresenter implements CollectContact.CollectPresenter {
         }
         response.addCollectDataToBmob(dataBean, new CollectBmobCallBack.CollectCallBack() {
             @Override
-            public void theCollectDataIsExited() {
-                dataView.showCollectDataIsExitedPage();
+            public void theCollectDataIsExisted() {
+                dataView.showCollectDataIsExistedPage();
             }
 
             @Override
@@ -79,7 +79,7 @@ public class CollectHanldPresenter implements CollectContact.CollectPresenter {
         }
         response.deleteCollectDataForBmob(dataBean, new CollectBmobCallBack.DeleteCollectCallBack() {
             @Override
-            public void deleteCollectSuccessfil() {
+            public void deleteCollectSuccessful() {
                 dataView.showDeleteCollectSuccessfulPage();
             }
 

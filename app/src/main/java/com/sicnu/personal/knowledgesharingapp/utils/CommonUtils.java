@@ -84,19 +84,6 @@ public class CommonUtils {
         return Environment.getExternalStorageDirectory() + getDownLoadSavePath(context) + fileName;
     }
 
-    public static void requestAllPower(Activity context) {
-        if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(context,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            } else {
-                ActivityCompat.requestPermissions(context,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-            }
-        }
-    }
 
     public static void requestSdPermissiton(final Activity activity,Action1<Permission> action1) {
         new RxPermissions(activity).requestEach(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)

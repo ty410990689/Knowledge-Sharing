@@ -30,7 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
         <activity android:name=".gank.knowledge.activity.HomeActivity"></activity>
         <activity android:name=".gank.knowledge.activity.WebActivity"
             android:launchMode="singleTask"></activity>

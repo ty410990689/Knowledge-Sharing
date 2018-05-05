@@ -40,16 +40,19 @@ public class RegisterPresenter {
     public RegisterPresenter(Activity activity){
         this.context = activity;
     }
+    //打开相册选择照片，在调用的时候进行权限申请
     public void openAlbumSelectPhoto(Activity context){
         Intent selectoerPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         context.startActivityForResult(selectoerPhoto, IMAGE);
     }
+    //注册功能
     public void registerUser(final String name, final String passWord, String filePath, final BmobCallBack callback){
         YLog.d("Bmob : loginByCustom");
         final BmobFile file = new BmobFile(new File(filePath));
         file.uploadblock(context, new UploadFileListener() {
             @Override
             public void onSuccess() {
+                //头像上传成功后开始申请注册用户
                 YLog.d("Bmob : file onSuccess");
                 UserLogin userLogin = new UserLogin();
                 userLogin.setUsername(name);
@@ -59,6 +62,7 @@ public class RegisterPresenter {
                 userLogin.signUp(context, new SaveListener() {
                     @Override
                     public void onSuccess() {
+                        //用户注册成功后回调给Activity,Activity在直接使用用户信息登录
                         YLog.d("Bmob : onSuccess");
                         callback.RequestSuccessful(name,passWord);
                     }

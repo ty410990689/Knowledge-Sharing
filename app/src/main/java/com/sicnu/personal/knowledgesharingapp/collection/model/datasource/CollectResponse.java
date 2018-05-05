@@ -28,7 +28,6 @@ public class CollectResponse {
     }
 
     public void addCollectDataToBmob(final CollectDataBean dataBean, final CollectBmobCallBack.CollectCallBack collectCallBack) {
-        YLog.d("BmobCollect :Find addCollectDataToBmob :");
         final BmobQuery<CollectDataBean> query = new BmobQuery<>();
         query.addWhereEqualTo("userName", dataBean.getUserName());
         query.addWhereEqualTo("articleTitle", dataBean.getArticleTitle());
@@ -38,20 +37,17 @@ public class CollectResponse {
         query.findObjects(mContext, new FindListener<CollectDataBean>() {
             @Override
             public void onSuccess(List<CollectDataBean> list) {
-                YLog.d("BmobCollect :Find onSuccess :"+list.size());
                 if (list != null && list.size() != 0) {
-                    collectCallBack.theCollectDataIsExited();
+                    collectCallBack.theCollectDataIsExisted();
                 } else {
                     dataBean.save(mContext, new SaveListener() {
                         @Override
                         public void onSuccess() {
-                            YLog.d("BmobCollect :save onSuccess :");
                             collectCallBack.collectSuccessful();
                         }
 
                         @Override
                         public void onFailure(int i, String s) {
-                            YLog.d("BmobCollect :save onFailure :"+s);
                             collectCallBack.collectFailed(i, s);
                         }
                     });
@@ -93,7 +89,7 @@ public class CollectResponse {
         dataBean.delete(mContext, new DeleteListener() {
             @Override
             public void onSuccess() {
-                collectCallBack.deleteCollectSuccessfil();
+                collectCallBack.deleteCollectSuccessful();
             }
 
             @Override

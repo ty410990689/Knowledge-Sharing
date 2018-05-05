@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -95,13 +96,28 @@ public class KnowledgeRcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 KnowledgeNormalViewHolder normalViewHolder = ((KnowledgeNormalViewHolder) holder);
                 if(mDatabean.get(position).getImages()!=null && mDatabean.get(position).getImages().size()>0) {
                     //加载Json数据中的网络图片
+                    normalViewHolder.ivHomeRcItemBg.setScaleType(ImageView.ScaleType.FIT_XY);
                     DraweeController mDraweeController = FrescoUtils.getDefaultImageRequest(mDatabean.get(position).getImages().get(0));
                     normalViewHolder.ivHomeRcItemBg.setController(mDraweeController);
 
                 }else{
                     //无网络图片时，加载本地图片
-                    Uri uri = Uri.parse("res:///"+R.mipmap.ic_launcher);
-                    normalViewHolder.ivHomeRcItemBg.setImageURI(uri);
+                    String type = mDatabean.get(position).getType();
+                    normalViewHolder.ivHomeRcItemBg.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                    if(type.contains(mContext.getString(R.string.knowledge_android))){
+                        Uri uri = Uri.parse("res:///"+R.mipmap.android_item_bg);
+                        normalViewHolder.ivHomeRcItemBg.setImageURI(uri);
+                    }else if(type.contains(mContext.getString(R.string.knowledge_ios))){
+                        Uri uri = Uri.parse("res:///"+R.mipmap.ios_item_bg);
+                        normalViewHolder.ivHomeRcItemBg.setImageURI(uri);
+                    }else  if(type.contains(mContext.getString(R.string.knowledge_web)) || type.contains("web")){
+                        Uri uri = Uri.parse("res:///"+R.mipmap.web_item_bg);
+                        normalViewHolder.ivHomeRcItemBg.setImageURI(uri);
+                    }else{
+                        Uri uri = Uri.parse("res:///"+R.mipmap.ios_logo);
+                        normalViewHolder.ivHomeRcItemBg.setImageURI(uri);
+                    }
+
                 }
                 normalViewHolder.tvKnowledgeDesc.setText(mDatabean.get(position).getDesc());
                 normalViewHolder.tvKnowledgeTime.setText(mDatabean.get(position).getPublishedAt());

@@ -179,7 +179,7 @@ public class WebFragment extends Fragment implements GankContact.GankView, Swipe
 
 
 
-    public void showCollectDataIsExitedPage() {
+    public void showCollectDataIsExistedPage() {
         Snackbar.make(flRootview, getString(R.string.collect_data_is_exited), Snackbar.LENGTH_SHORT).show();
     }
 
